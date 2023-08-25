@@ -1,0 +1,137 @@
+:root{
+    --primary-color: #1E1E1E;
+    --secondary-color: #2A2A2A;
+    --blue-color: #29A8DF;
+    --golden-color: #e2a711;
+    --white-color: white;
+}
+
+
+
+.auth-container{
+    display: flex;
+    height: 100%;
+}
+
+.left-container{
+    background-color: var(--primary-color);
+    width: 50%;
+    position: relative;
+
+}
+
+.right-container{
+    background-color: var(--secondary-color);
+    width: 50%;
+}
+
+.logo-img{
+    position: absolute;
+    width: 130px;
+    top: 16rem;
+    left: 38rem;
+    border-radius: 50%;
+    border: solid 7px var(--secondary-color);
+    z-index: 100;
+}
+
+.app-logo{
+    font-size: 2rem;
+    font-weight: 600;
+    margin-left: 1.3rem;
+    margin-top: 1.5rem;
+    color: var(--blue-color)
+}
+
+.logo-design{
+    color: var(--golden-color)
+}
+
+.greetings-container{
+    margin-top: 10rem;
+    text-align: center;
+    /* margin-left: 11rem; */
+}
+
+.greeting-one{
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--white-color)
+}
+
+.greeting-two{
+    font-size: 4.5rem;
+    font-weight: 600;
+    color: #4e6cf3;
+}
+
+.greeting-three{
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--white-color)
+}
+
+.author{
+    margin-top: 9rem;
+    text-align: center;
+    color: var(--white-color);
+    font-size: 1.3rem;
+    margin-bottom: 2.8rem;
+}
+
+.author-name{
+    color: var(--golden-color);
+    text-decoration: none;
+}
+
+.auth-info{
+    margin-top: 13.2rem;
+    margin-left: 9.8rem;
+    
+}
+
+.join-us{
+    color: var(--white-color);
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.signup-btn{
+    font-size: 1rem;
+    background-color: #2E8BE6;
+    border: none;
+    border-radius: 10px;
+    padding: 11px 13px;
+    color: var(--white-color);
+    margin-top: 1rem; 
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+}
+
+.signup-btn:hover{
+    background-color: #0e61b4;
+}
+
+.already-acc{
+    color: var(--white-color);
+    font-size: 2.3rem;
+    font-weight: 600;
+    width: 350px;
+}
+
+.login-btn{
+    font-size: 1.1rem;
+    background-color: transparent;
+    border: solid 2px #2E8BE6;
+    border-radius: 10px;
+    padding: 9px 20px;
+    color: #2E8BE6;
+    margin-top: 1rem; 
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.login-btn:hover{
+    background-color: #2E8BE6;
+    color:var(--white-color )
+}
