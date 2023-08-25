@@ -30,7 +30,7 @@ const Profile = () => {
 
         <div className='user-bio'>
         <p className='user-info'>Aspiring Full Stack developer 👨‍💻 | learning and sharing | </p>
-        <Link className='github-link' to="https://github.com/leader-akash" >https://github.com/leader-akash</Link>
+        <Link className='github-link' to="https://github.com/leader-akash" target="_blank" >https://github.com/leader-akash</Link>
         </div>
 
         <div className='following-info'>
