@@ -1,14 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import "./Authentication.css"
 import { Link } from 'react-router-dom';
 import logo from "../../assets/logo.png"
+import LoginModal from '../../components/auth-modals/LoginModal';
+import SignupModal from '../../components/auth-modals/SignupModal';
 
 const Authentication = () => {
+
+    const [signupOpen, setSignupOpen] = useState(false);
+    const [loginOpen, setLoginOpen] = useState(false);
+
+    const openSignupModal = () => {
+        setSignupOpen(true);
+    }
+
+    const closeSignupModal = () => {
+        setSignupOpen(false);
+    }
+    const closeLoginModal = () => {
+        setLoginOpen(false);
+    }
+
+    const openLoginModal = () => {
+        setLoginOpen(true)
+    }
+
     return (
         <div className='auth-container'>
-        <div>
-            <img className='logo-img' src={logo} alt="logo" />
-        </div>
+            <div>
+                <img className='logo-img' src={logo} alt="logo" />
+            </div>
             <div className='left-container'>
                 <div>
                     <p className='app-logo'>Classy <span className='logo-design'>Media</span></p>
@@ -31,14 +52,27 @@ const Authentication = () => {
                 <div className='auth-info'>
                     <div>
                         <p className='join-us'>Join Us</p>
-                        <button className='signup-btn'>Signup now</button>
+                        <button className='signup-btn' onClick={openSignupModal} >Signup now</button>
                     </div>
                     <div>
                         <p className='already-acc'>Already have an account ?</p>
-                        <button className='login-btn'>Login</button>
+                        <button className='login-btn' onClick={openLoginModal}>Login</button>
                     </div>
                 </div>
             </div>
+
+            <LoginModal
+                loginOpen={loginOpen}
+                openLoginModal={openLoginModal}
+                closeLoginModal={closeLoginModal}
+            />
+            <SignupModal
+                signupOpen={signupOpen}
+                openSignupModal={openSignupModal}
+                closeSignupModal={closeSignupModal}
+            />
+
+
         </div>
     )
 }

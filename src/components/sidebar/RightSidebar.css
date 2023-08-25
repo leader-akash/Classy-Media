@@ -1,0 +1,88 @@
+
+.right-sidebar{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 370px;
+    height: 100%;
+    background-color: black;
+    border-left: solid 2px var(--hover)
+
+}
+
+.right-content{
+    color: var(--white-color);
+    background-color: var(--hover);
+    width: 300px;
+    margin-left: 2.2rem;
+    margin-top: 5rem;
+    border-radius: 15px;
+    padding-bottom: 1rem;
+    box-shadow: 0px 2px 1px 1px white;
+}
+
+.follow{
+    margin-left: 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding-top: 1rem;
+}
+
+.right-profile{
+    margin-top: 0.2rem;
+    margin-left: 1rem;
+    display: flex;
+    align-items: center;
+    width: 250px;
+    position: relative;
+
+}
+
+.right-profile:hover{
+    background-color: #555454;
+}
+
+.follow-btn{
+    position: absolute;
+    right: 15px;
+    background-color: gold;
+    border: none;
+    height: 30px;
+    padding: 0px 10px !important;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.unfollow-btn{
+    background-color: #fadc35;
+}
+
+.follow-btn:hover{
+    background-color: #d8b806;
+}
+
+.right-profile-info{
+    margin-left: 0.7rem;
+}   
+.right-profile-name{
+    font-size: 14px;
+}
+
+.right-profile-img{
+    width: 45px;
+    height: 42px;
+    border-radius: 50%;
+}
+
+
+.connect-with-me{
+    color: var(--white-color);
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 2rem;
+    cursor: pointer;
+}
+
+.connect-with-me:hover{
+    color: #ccc;
+}
