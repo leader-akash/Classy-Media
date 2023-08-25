@@ -1,0 +1,39 @@
+.signupModal{
+    background-color: transparent;
+}
+
+
+
+.react-responsive-modal-modal { 
+    background: transparent !important;
+    position: relative;
+}
+
+.react-responsive-modal-closeButton {
+    position: absolute;
+    top: 80px;
+    right: 31px;
+    background-color: transparent;
+}
+
+.login-form{
+    width: 320px;
+}
+.test-info{
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-checkbox{
+    width: 12px !important;
+    margin-right: 10px;
+}
+
+.signin-guest{
+    margin-top: 1rem;
+    background-color: #646363 !important;
+}
+
+.signin-guest:hover{
+    background-color: #1818fc !important;
+}

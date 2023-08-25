@@ -1,0 +1,134 @@
+
+:root{
+    --hover: #181818;
+}
+
+.logo-homepage{
+    width: 50px;
+    display: block;
+    margin: 1.5rem 2rem 0 3.5rem;
+    cursor: pointer;
+}
+
+.sidebar-container{
+    width: 280px;
+    height: 100%;
+    background-color: #000000;
+    position:fixed;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 2px var(--hover);
+}
+
+
+.item-container{
+    color: var(--white-color);
+    margin-left: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}
+
+.items{
+    /* background-color: #1eda9b; */
+    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 10px  20px;
+    width: 140px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 20px;
+
+}
+
+.items-active{
+    background-color: var(--hover);
+
+}
+
+.items:hover{
+    background-color:var(--hover);
+}
+
+
+
+.side-icon{
+    margin-right: 0.5rem;
+    font-size: 1.3rem
+}
+
+.profile-settings{
+    color: var(--white-color);
+    margin-left: 3rem;
+    margin-top: 9rem;
+    display: flex;
+    padding: 10px 10px;
+    width: 190px;
+    border-radius: 30px;
+    cursor: pointer;
+    position: relative;
+}
+
+.profile-settings:hover{
+    background-color: var(--hover);
+
+}
+
+.profile-img{
+    width: 40px;
+    border-radius: 50%;
+}
+
+.profile-info{
+    margin-left: 0.8rem;
+}
+
+.profile-name{
+    margin-left: 0.2rem;
+}
+
+.option-btn{
+    margin-left: 1.5rem;
+    margin-top: 0.1rem;
+    font-size: 20px;
+}
+
+.logout-feature{
+    display: flex;
+    flex-direction: column;
+    border:  0.1px solid var(--hover);
+    position: absolute;
+    bottom: 105px;
+    width: 190px;
+    margin-left: 3.5rem;
+    border-radius: 10px;
+}
+
+.logout-profile-settings{
+    color: var(--white-color);
+    display: flex;
+    padding: 10px 10px;
+    width: 190px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+
+.logout-btn{
+    padding-left: 1.7rem;
+    color: var(--white-color);
+    font-size: 15px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    border-radius: 10px;
+    cursor: pointer;
+    /* width: 190px; */
+}
+.check-sign{
+    margin-left: 0.5rem;
+    color: green;
+    font-size: 18px;
+}
+
+.logout-btn:hover{
+    background-color: var(--hover);
+}

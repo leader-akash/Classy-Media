@@ -1,0 +1,110 @@
+.profile-container{
+    margin-left: 285px;
+    width: 50%;
+    margin-top: 5rem;
+    color: var(--white-color);
+    border-bottom: solid 1px var(--hover);
+}
+
+.bg-img{
+    height: 230px;
+    width: 100%;
+    /* border: solid 1px white; */
+    position: relative;
+}
+
+.user-settings{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-image{
+    width: 20%;
+    border-radius: 50%;
+    margin-top: -70px;
+    z-index: 1;
+    margin-left: 20px;
+    /* position: absolute; */
+    /* bottom: -89px;
+    left: 310px; */
+    border: solid 1px white;
+}
+
+.edit-profile{
+    margin-top: 13px;
+    color: white;
+    height: 40px;
+    padding: 0px  20px !important  ;
+    background-color: transparent;
+    border: solid 1px white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.edit-profile:hover{
+    background-color: #979494;
+}
+
+.username-userid{
+    margin-top: 0.5rem;
+    margin-left: 2.1rem;
+}
+
+.user-username{
+    font-size: 22px;
+}
+
+.user-userid{
+    font-size: 14px;
+}
+
+.github-link{
+    color: #0084ff
+}
+
+.user-bio{
+    margin-top: 1rem;
+    margin-left: 2.1rem;
+    margin-bottom: 1rem;
+}
+
+.user-info{
+    margin-bottom: 1rem;
+}
+
+.github-link{
+    margin-top: 1rem !important;
+}
+
+.github-link:hover{
+    color: #055fb4;
+}
+
+.following-info{
+    margin-left: 2.1rem;
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+
+.following{
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.following:hover{
+    color: #0084ff;
+}
+
+
+.followers:hover{
+    color: #0084ff;
+}
+
+.followers{
+    cursor: pointer;
+}
+
+.profile-msg-box{
+    margin-top: -1rem;
+}
