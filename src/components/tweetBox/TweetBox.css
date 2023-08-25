@@ -32,6 +32,7 @@
 .tweet-footer{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-top: 1.5rem;
     margin-bottom: -0.5rem;
 }
@@ -62,8 +63,9 @@
 
 .count-tweet-btn{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    margin-top: -36px;
 }
 
 .text-limit{
@@ -75,11 +77,10 @@
 
 .tweet-btn{
     font-size: 16px;
-    /* padding: 0 !important; */
     margin: 0 2rem;
     background-color: #1581fc;
     border: none;
-    padding: 10px 20px !important;
+    padding: 10px 20px 10px 16px !important;
     color: white;
     border-radius: 20px;
     cursor: pointer;
