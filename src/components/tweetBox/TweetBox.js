@@ -55,7 +55,7 @@ const TweetBox = () => {
 
             <div className='count-tweet-btn'>
             <p className='text-limit'>{textLimit}</p>
-            <button className='tweet-btn' type='submit' >Tweet</button>
+            <button className='tweet-btn' type='submit' >Post</button>
             </div>
         </div>
         {/* </form> */}
