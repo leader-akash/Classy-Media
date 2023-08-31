@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../contexts/user-context';
+import { useUser } from '../../contexts/user-context';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/slice/authSlice';
 
 const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
 
@@ -12,62 +14,57 @@ const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const [usernameVal, setUsernameVal] = useState();
-  const [passwordVal, setPasswordVal] = useState();
-  const { getToken, setGetToken } = useUser();
+  const [usernameVal, setUsernameVal] = useState('');
+  const [passwordVal, setPasswordVal] = useState('');
 
-
-  const handlePasswordVisible = () => {
-    setIsPasswordVisible(prev => !prev);
-  }
+  const dispatch = useDispatch();
 
   const handleUsername = (e) => {
     setUsernameVal(e.target.value);
+  }
+  const handlePasswordVisible = () => {
+    setIsPasswordVisible(prev => !prev);
   }
 
   const handlePassword = (e) => {
     setPasswordVal(e.target.value);
   }
 
-  const handleLoginAsGuest = (e) => {
-    setUsernameVal("AkashKing");
-    setPasswordVal("akash123")
-    navigate("/home")
+  // const handleLoginAsGuest = (e) => {
+  //     setUsernameVal("Akash123");
+  //     setPasswordVal("akash123")
+  // }
+
+  const data = {
+    username: usernameVal,
+    password: passwordVal
   }
 
   const handleLogin = (e) => {
     e.preventDefault();
-    axios.post(`/api/auth/login`, {
-      username : usernameVal,
-      password: passwordVal,
-    })
-      .then((res) => {
-        console.log("usr", res)
-        localStorage.setItem("token", res.data?.encodedToken);
-        localStorage.setItem("userinfo", JSON.stringify(res?.data?.foundUser))
-        setGetToken(res?.data?.encodedToken);
-        toast.success(`welcome back, ${res.data?.foundUser?.name} 🎉`)
-        navigate("/home");
-      })
-      .catch((err) => {
-        console.log("err", err)
-        toast.error('User not found')
-      })
+    console.log('abc', data)
+    dispatch(loginUser(data))
+    navigate("/home");
+
   }
 
+
+  const handleLoginAsGuest = (e) => {
+    e.preventDefault();
+    dispatch(loginUser({ username: 'akash123', password: 'akash123' }))
+    navigate("/home");
+  }
 
   return (
     <Modal open={loginOpen} onClose={closeLoginModal} center>
       <div className='login-page'>
-
-
         <div>
           <div className="login-container login-form">
             <h2 className='login-header '>Login</h2>
             <form id="loginForm" onSubmit={handleLogin}>
               <div>
                 <label className="form-inputs"> Username </label>
-                <input className='input-box' type="text" id="login-email" placeholder="akash@mail.com" onChange={handleUsername} value={usernameVal} required />
+                <input className='input-box' type="text" id="login-email" placeholder="Akash123" onChange={handleUsername} value={usernameVal} required />
               </div>
               <div>
                 <label className="form-inputs"> Password </label>
@@ -89,7 +86,7 @@ const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
               <div>
                 <button className="signin-button" type="submit" >Login</button>
 
-                <button className="signin-guest" type="submit" onClick={handleLoginAsGuest}>Login as Guest</button>
+                <button className="signin-guest" type="submit" value="guest" onClick={handleLoginAsGuest}>Login as Guest</button>
               </div>
 
 

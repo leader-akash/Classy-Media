@@ -40,9 +40,7 @@ export const addPostCommentHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          error: "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -53,14 +51,17 @@ export const addPostCommentHandler = function (schema, request) {
       _id: uuid(),
       ...commentData,
       username: user.username,
+      lastName: user.lastName,
+      firstName: user.firstName,
+      profilePic: user.profilePic,
       votes: { upvotedBy: [], downvotedBy: [] },
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
     const post = schema.posts.findBy({ _id: postId }).attrs;
     post.comments.push(comment);
-    this.db.posts.update({ _id: postId }, post);
-    return new Response(201, {}, { comments: post.comments });
+    this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
+    return new Response(201, {}, { posts: this.db.posts });
   } catch (error) {
     return new Response(
       500,
@@ -85,9 +86,7 @@ export const editPostCommentHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          error: "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -101,7 +100,7 @@ export const editPostCommentHandler = function (schema, request) {
       return new Response(
         400,
         {},
-        { errors: ["Cannot edit a comment doesn't belong to the User."] }
+        { error: "Cannot edit a comment doesn't belong to the User." }
       );
     }
     post.comments[commentIndex] = {
@@ -135,9 +134,7 @@ export const deletePostCommentHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          error: "The username you entered is not Registered. Not Found error",
         }
       );
     }
@@ -153,7 +150,7 @@ export const deletePostCommentHandler = function (schema, request) {
       return new Response(
         400,
         {},
-        { errors: ["Cannot delete a comment doesn't belong to the User."] }
+        { error: "Cannot delete a comment doesn't belong to the User." }
       );
     }
     post.comments = post.comments.filter(
@@ -185,17 +182,15 @@ export const upvotePostCommentHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          error: "The username you entered is not Registered. Not Found error",
         }
       );
     }
     const { postId, commentId } = request.params;
+    const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
-    const post = schema.posts.findBy({ _id: postId }).attrs;
 
     if (
       post.comments[commentIndex].votes.upvotedBy.some(
@@ -205,7 +200,7 @@ export const upvotePostCommentHandler = function (schema, request) {
       return new Response(
         400,
         {},
-        { errors: ["Cannot upvote a post that is already upvoted. "] }
+        { error: "Cannot upvote a post that is already upvoted. " }
       );
     }
     post.comments[commentIndex].votes.downvotedBy = post.comments[
@@ -238,17 +233,15 @@ export const downvotePostCommentHandler = function (schema, request) {
         404,
         {},
         {
-          errors: [
-            "The username you entered is not Registered. Not Found error",
-          ],
+          error: "The username you entered is not Registered. Not Found error",
         }
       );
     }
     const { postId, commentId } = request.params;
+    const post = schema.posts.findBy({ _id: postId }).attrs;
     const commentIndex = post.comments.findIndex(
       (comment) => comment._id === commentId
     );
-    const post = schema.posts.findBy({ _id: postId }).attrs;
 
     if (
       post.comments[commentIndex].votes.downvotedBy.some(
@@ -258,7 +251,7 @@ export const downvotePostCommentHandler = function (schema, request) {
       return new Response(
         400,
         {},
-        { errors: ["Cannot downvote a post that is already downvoted. "] }
+        { error: "Cannot downvote a post that is already downvoted. " }
       );
     }
     post.comments[commentIndex].votes.upvotedBy = post.comments[
@@ -266,7 +259,7 @@ export const downvotePostCommentHandler = function (schema, request) {
     ].votes.upvotedBy.filter((currUser) => currUser._id !== user._id);
     post.comments[commentIndex].votes.downvotedBy.push(user);
     this.db.posts.update({ _id: postId }, { ...post, updatedAt: formatDate() });
-    return new Response(201, {}, {  comments: post.comments  });
+    return new Response(201, {}, { comments: post.comments });
   } catch (error) {
     return new Response(
       500,

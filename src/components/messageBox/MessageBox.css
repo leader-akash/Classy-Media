@@ -25,6 +25,13 @@
 
 .msg-sender{
     display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.post-user{
+    display: flex;
+    align-items: center;
 }
 
 .msg-id{
@@ -40,7 +47,8 @@
 
 .msg-text{
     margin-top: 1rem;
-    word-wrap: wrap;
+    word-wrap: break-word;
+    margin-right: 2.3rem;
 }
 
 .msg-icons{
@@ -56,9 +64,22 @@
 
 .red-heart{
     color:red;
+}
+
+.fa-heart {
     margin-right: 4px;
 }
 
 .blue-bookmarked{
     color: #0077ff;
+}
+
+.delete-btn{
+    color: var(--white-color);
+    margin-right: 2.6rem;
+    cursor: pointer;
+}
+
+.delete-btn:hover{
+    color: red;
 }

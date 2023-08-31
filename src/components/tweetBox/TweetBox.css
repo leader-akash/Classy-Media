@@ -20,7 +20,7 @@
 
 .tweet-input{
     margin-left: 75px;
-    margin-top: 1rem;
+    margin-top: -0.3rem;
     font-size: 17px;
     color: var(--white-color);
     background-color: transparent;
