@@ -10,14 +10,17 @@ const UserContext = createContext(null);
 const UserProvider = ({children}) => {
 
     const [getToken, setGetToken] = useState("");
+    const [signupToken, setSignupToken] = useState("")
 
     useEffect(()=>{
         setGetToken(localStorage.getItem("token"));
+        setSignupToken(localStorage.getItem("token"))
     },[])
 
+    const [isLoggedIn, setIsLoggedIn]= useState(getToken? true : false);
 
   return (
-    <UserContext.Provider value={{getToken, setGetToken }}>
+    <UserContext.Provider value={{getToken, setGetToken, isLoggedIn, setIsLoggedIn, signupToken, setSignupToken }}>
         {children}
     </UserContext.Provider>
   )

@@ -1,11 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Profile.css"
 import LeftSidebar from '../../components/sidebar/LeftSidebar';
 import MessageBox from '../../components/messageBox/MessageBox';
 import RightSidebar from '../../components/sidebar/RightSidebar';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllPostsByUsername } from '../../redux/slice/postSlice';
 
 const Profile = () => {
+
+  const { post: {postByUsername, error, loading}, auth: {user} } = useSelector((state) =>( {post: state.post, 
+    auth: state.auth
+  }));
+
+  console.log('pppp', user)
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllPostsByUsername(user?.username))
+  }, [postByUsername])
+
+
   return (
     <div>
           <LeftSidebar />
@@ -41,7 +57,13 @@ const Profile = () => {
       </div>
 
       <div className='profile-msg-box'>
-          <MessageBox />
+      {
+        postByUsername?.map((el)=> (
+          <MessageBox
+            details={el}
+           />
+        ))
+      }
       </div>
 
       <RightSidebar />

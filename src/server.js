@@ -16,14 +16,6 @@ import {
   getAllUserPostsHandler,
 } from "./backend/controllers/PostController";
 import {
-  getPostCommentsHandler,
-  addPostCommentHandler,
-  editPostCommentHandler,
-  deletePostCommentHandler,
-  upvotePostCommentHandler,
-  downvotePostCommentHandler,
-} from "./backend/controllers/CommentsController";
-import {
   followUserHandler,
   getAllUsersHandler,
   getUserHandler,
@@ -33,6 +25,14 @@ import {
   unfollowUserHandler,
   editUserHandler,
 } from "./backend/controllers/UserController";
+import {
+  getPostCommentsHandler,
+  addPostCommentHandler,
+  editPostCommentHandler,
+  deletePostCommentHandler,
+  upvotePostCommentHandler,
+  downvotePostCommentHandler,
+} from "./backend/controllers/CommentsController";
 
 export function makeServer({ environment = "development" } = {}) {
   return new Server({
@@ -99,6 +99,7 @@ export function makeServer({ environment = "development" } = {}) {
         "/comments/downvote/:postId/:commentId",
         downvotePostCommentHandler.bind(this)
       );
+
       // user routes (public)
       this.get("/users", getAllUsersHandler.bind(this));
       this.get("/users/:userId", getUserHandler.bind(this));

@@ -1,52 +1,107 @@
 import React, { useState } from 'react';
 import "./MessageBox.css"
 import { toast } from 'react-toastify';
+import { deletePostById, dislikePost, likePost } from '../../redux/slice/postSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { bookmarkPost, removeBookmark } from '../../redux/slice/bookmarkSlice';
 
-const MessageBox = () => {
+const MessageBox = ({ details }) => {
 
-  const [likedNumber, setLikedNumber] = useState(1000);
-  const [liked, setLiked] = useState(false);
 
-  const [bookmarked, setBookmarked] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+
+  const { posts, currentPost, loading, postActionLoading } = useSelector(
+    (state) => state.post
+  );
+
+  const { bookmarks } = useSelector((state) => state.bookmark);
+
+
+  const dispatch = useDispatch();
+
+  const handleLike = (_id) => {
+    dispatch(likePost(details?._id))
+  }
+
+  const handleDislike = () => {
+    dispatch(dislikePost(details?._id))
+  }
+
+  const handleBookmarks = () => {
+    dispatch(bookmarkPost(details?._id))
+  }
+
+  const handleRemoveBookmark = (_id) => {
+    dispatch(removeBookmark(details?._id))
+  }
+
+  const handleDeletePost = () => {
+    dispatch(deletePostById(details._id))
+  }
+
 
   return (
     <div className='message-container'>
       <div>
-        <img className='msg-img' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZcAWjfimDKnKCj3C-Jv4NZLaGIOLxtuwGr3IcLDQ4&s" alt="img" />
+        <img className='msg-img' src={details?.userPhoto} alt="img" />
+        {/* <img className='msg-img' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZcAWjfimDKnKCj3C-Jv4NZLaGIOLxtuwGr3IcLDQ4&s" alt="img" /> */}
       </div>
       <div className='msg-input'>
-        <div className="msg-sender"> 
-          <p className='msg-id'>Elon Musk</p>
-          <p className='msg-id-two'>@elonmusk</p>
+        <div className="msg-sender">
+          <p className='post-user'>
+            <p className='msg-id'>{details?.firstName}</p>
+            <p className='msg-id-two'>@{details?.username}</p>
+          </p>
+          {
+            user?.username === details?.username ?
+              <p>
+                <i className="fa fa-trash delete-btn" onClick={handleDeletePost}></i>
+              </p>
+              :
+              ''
+          }
+
         </div>
-        <p className='msg-text'>Akash, I personally liked your projects. Well done!! </p>
+        <p className='msg-text'>{details.content}</p>
 
         <div className='msg-icons'>
-        {
-          !liked ? 
-          <p className='action-icons' onClick={()=> {setLiked(true);
-          toast.success("Liked post")
-          }}><i class="fa-regular fa-heart " ></i> {likedNumber }</p>
-          :
-          <p className='action-icons' onClick={()=> {setLiked(false);
-          toast.success("Unliked post")
-          }}><i class="fa-solid fa-heart  red-heart" ></i>{likedNumber +1 } </p>
-        }
-          <p className='action-icons'><i class="fa-regular fa-comment "></i> 0</p>
-          {
-            !bookmarked ?
-          <p className='action-icons' onClick={()=>{
-            setBookmarked(true);
-            toast.success("Added to Bookmarks !");
-          }}><i class="fa-regular fa-bookmark "></i> </p>
-          :  
-          <p className='action-icons' onClick={()=>{
-            setBookmarked(false);
-            toast.success("Removed from Bookmarks !");
-          }}><i class="fa-solid fa-bookmark blue-bookmarked"></i> </p>
+
+          {details?.likes?.likedBy.length !== 0 &&
+            details?.likes.likedBy.some((item) => item?.username === user?.username)
+            ?
+            <p className='action-icons' onClick={() => {
+              handleDislike();
+            }}>
+              <i className="fa-solid fa-heart red-heart" ></i>{details?.likes?.likeCount} </p>
+            :
+            <p className='action-icons' onClick={() => {
+              handleLike();
+            }}>
+              <i className="fa-regular fa-heart " ></i>{details?.likes?.likeCount} </p>
           }
+
+          {/* comment section */}
+          <p className='action-icons'><i className="fa-regular fa-comment "></i> 0</p>
+
+          {/* bookmark */}
+          {
+            bookmarks?.length !== 0 && bookmarks?.some((bookmark) => bookmark?._id === details?._id) ?
+              <p className='action-icons' onClick={() => {
+                handleRemoveBookmark();
+                toast.success("Removed from Bookmarks !");
+              }}><i className="fa-solid fa-bookmark blue-bookmarked"></i> </p>
+
+              :
+
+              <p className='action-icons' onClick={() => {
+                handleBookmarks()
+                toast.success("Added to Bookmarks !");
+              }}><i className="fa-regular fa-bookmark "></i> </p>
+          }
+
         </div>
       </div>
+
     </div>
   )
 }

@@ -3,8 +3,13 @@ import "./Explore.css";
 import MessageBox from '../../components/messageBox/MessageBox'
 import RightSidebar from '../../components/sidebar/RightSidebar'
 import LeftSidebar from '../../components/sidebar/LeftSidebar'
+import { useSelector } from 'react-redux';
 
 const Explore = () => {
+
+  const {posts} = useSelector((state)=> state.post)
+
+
   return (
     <div>
         <LeftSidebar />
@@ -14,7 +19,13 @@ const Explore = () => {
       </div>
 
       <div className='explore-msg-box'>
-          <MessageBox />
+      {
+        posts.map((el)=> (
+          <MessageBox
+            details={el}
+           />
+        ))
+      }
       </div>
 
       <RightSidebar />
