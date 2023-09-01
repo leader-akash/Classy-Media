@@ -12,7 +12,7 @@ export const posts = [
     content:
       "Akash posts some amazing content related to tech and programming. You muct visit his profile and follow him!",
     likes: {
-      likeCount: 700,
+      likeCount: 790,
       likedBy: [],
       dislikedBy: [],
     },
@@ -30,9 +30,9 @@ export const posts = [
 
   {
     _id: uuid(),
-    content: "Created a Social Media App called 'Rapid Fire'",
+    content: "Created a Social Media App called 'Classy Media'",
     likes: {
-      likeCount: 200,
+      likeCount: 999,
       likedBy: [],
       dislikedBy: [],
     },
@@ -40,7 +40,7 @@ export const posts = [
     postPic:
       "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
     firstName: "Akash ",
-    lastName: "Kumar",
+    lastName: "",
     username: "akash123",
     userPhoto:
       "https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg",
@@ -70,7 +70,7 @@ export const posts = [
     _id: uuid(),
     content: "Inhale the future, Exhale the past.",
     likes: {
-      likeCount: 2700,
+      likeCount: 2500,
       likedBy: [],
       dislikedBy: [],
     },

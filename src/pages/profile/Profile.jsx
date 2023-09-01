@@ -1,25 +1,61 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./Profile.css"
 import LeftSidebar from '../../components/sidebar/LeftSidebar';
 import MessageBox from '../../components/messageBox/MessageBox';
 import RightSidebar from '../../components/sidebar/RightSidebar';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllPostsByUsername } from '../../redux/slice/postSlice';
+import EditModal from '../../components/modals/edit-modal/EditModal';
+import { editUser, followUser, unFollowUser } from '../../redux/slice/authSlice';
+import avatar from '../../assets/avatar.png'
+import { getUserById } from '../../redux/slice/userSlice';
 
 const Profile = () => {
+  const {username} = useParams();
 
-  const { post: {postByUsername, error, loading}, auth: {user} } = useSelector((state) =>( {post: state.post, 
-    auth: state.auth
+  const location = useLocation();
+
+  const [editModalOpen, setEditModalOpen] = useState(false);
+
+  const { post: {postByUsername, error, loading}, auth: {user},  } = useSelector((state) =>( {post: state.post, auth: state.auth
   }));
 
-  console.log('pppp', user)
+
+  const {usersData, selectedUser} = useSelector((state)=> state.user);  
+
+  const [singleUser, setSingleUser] = useState(user);
+
+  useEffect(()=>{
+    const currentUser = usersData?.find((item)=> item?.username === username);
+    
+    if(currentUser){
+      setSingleUser(currentUser)
+      
+    }
+    else{
+      setSingleUser(user);
+    }
+  }, [user, usersData, user?.username, postByUsername])
+
 
   const dispatch = useDispatch();
 
+
+  if(postByUsername !== singleUser?.usrname){
+
+  }
+
   useEffect(() => {
+    // if(singleUser?.username === user?.usrname){
     dispatch(getAllPostsByUsername(user?.username))
-  }, [postByUsername])
+    // }
+  }, [user, postByUsername])
+
+  const closeEditModal = () => {
+
+    setEditModalOpen(false);
+  }
 
 
   return (
@@ -31,27 +67,46 @@ const Profile = () => {
       </div>
 
       <div className='profile-container'>
-        <img className='bg-img' src='https://o.remove.bg/downloads/bcc5cc9a-86c9-464c-be17-563ede297661/png-clipart-laptop-gaming-computer-origin-pc-desktop-computers-personal-computer-laptop-game-electronics-removebg-preview.png' alt="bg-img" />
+      {singleUser?.coverPhoto ?
+        <img className='bg-img' src={singleUser?.coverPhoto} loading='lazy' alt="bg-img" />
+        : 
+        <img className='bg-img' src='https://static.vecteezy.com/system/resources/thumbnails/006/277/661/small/studio-empty-background-wall-and-floor-grunge-texture-cement-concrete-display-scene-free-photo.jpg' loading='lazy' alt="bg-img" />
+      }
 
         <div className='user-settings'>
-          <img className='profile-image' src="https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg" alt="profile-img" />
-
-          <button className='edit-profile'>Edit profile</button>
+        {
+          singleUser?.userPhoto ? 
+          <img className='profile-image' src={singleUser?.userPhoto} loading='lazy' alt="profile-img" />
+          :
+          <img className='profile-image' src={avatar} loading='lazy' alt="profile-img" />
+        }
+        {
+          singleUser?.username === user?.username ?
+          (<button className='edit-profile' onClick={()=> {setEditModalOpen(true)}}>Edit profile</button>)
+          :
+          user?.following?.some((el)=> el?.username === singleUser?.username) 
+          ?
+          (<button className='follow-btn unfollow-btn' onClick={() => {dispatch(unFollowUser(singleUser?._id));
+        }}>Following</button>)
+        :
+        (<button className='follow-btn' onClick={() => {dispatch(followUser(singleUser?._id));
+         }}>Follow</button>)
+        }
         </div>
 
         <div className='username-userid'>
-          <p className='user-username'>Akash</p>
-          <p className='user-userid'>@AkashKing1</p>
+          <p className='user-username'>{singleUser?.firstName}</p>
+          <p className='user-userid'>{singleUser?.username}</p>
         </div>
 
         <div className='user-bio'>
-        <p className='user-info'>Aspiring Full Stack developer 👨‍💻 | learning and sharing | </p>
-        <Link className='github-link' to="https://github.com/leader-akash" target="_blank" >https://github.com/leader-akash</Link>
+        <p className='user-info'>{singleUser?.bio}</p>
+        <Link className='github-link' to={singleUser?.link} target="_blank" >{singleUser?.link}</Link>
         </div>
 
         <div className='following-info'>
-            <p className='following'> 0 Following</p>
-            <p className='followers'> 0 Follower</p>
+            <p className='following'> {singleUser?.following?.length} Following</p>
+            <p className='followers'> {singleUser?.followers?.length} Follower</p>
         </div>
 
       </div>
@@ -67,6 +122,12 @@ const Profile = () => {
       </div>
 
       <RightSidebar />
+
+      <EditModal 
+         editOpen={editModalOpen}
+                openEditModal={editModalOpen}
+                closeEditModal={closeEditModal}
+      />
 
     </div>
   )

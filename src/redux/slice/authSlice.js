@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from 'react-toastify';
-import { loginApi, signupApi } from "../../apis/apis";
+import { editUserApi, followUserApi, loginApi, signupApi, unFollowUserApi } from "../../apis/apis";
 
 const initialState = {
     status: 'idle',
@@ -32,7 +32,6 @@ const initialState = {
 
 
 export const loginUser = createAsyncThunk('auth/loginUser', async (data, { rejectWithValue }) => {
-    console.log('eee-res', data)
     try {
         const res = await loginApi(data);
 
@@ -45,12 +44,52 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (data, { rejec
 })
 
 export const signup = createAsyncThunk('auth/signup', (data) => {
-    console.log('ddd', data)
     return signupApi(data).then((res) => {
-        console.log('userrrrr', res)
         return res.data
     }).catch(err => console.log('userrr-err', err))
 })
+
+
+export const editUser = createAsyncThunk('auth/editUser', async(userData, {rejectWithValue})=>{
+    try{
+        const token = localStorage.getItem('token');
+        const res = await editUserApi(token, userData);
+        return res?.data?.user
+    }
+    catch(err){
+        rejectWithValue(err);
+    }
+})
+
+
+export const followUser = createAsyncThunk('auth/followUser', async(followUserId, {rejectWithValue})=>{
+    try{
+        const token = localStorage.getItem('token');
+        const res = await followUserApi(token, followUserId)
+        toast.success('followed')
+        return res?.data?.followUser
+    }
+    catch(err){
+        rejectWithValue(err)
+    }
+});
+
+export const unFollowUser = createAsyncThunk('auth/unFollowUser', async(id, {rejectWithValue})=>{
+    try{
+        const token = localStorage.getItem('token');
+        const res = await unFollowUserApi(token, id);
+        toast.success('unfollowed')
+        return res?.data?.followUser
+    }
+    catch(err){
+        rejectWithValue(err)
+    }
+});
+
+
+
+
+
 
 const authSlice = createSlice(
     {
@@ -68,7 +107,6 @@ const authSlice = createSlice(
         extraReducers: (builder) => {
             // login 
             builder.addCase(loginUser.fulfilled, (state, action) => {
-                console.log('kkkk-ful', action, state)
                 state.token = action.payload?.encodedToken;
                 localStorage.setItem("token", state?.token)
                 state.user = action.payload?.foundUser;
@@ -83,7 +121,6 @@ const authSlice = createSlice(
                 state.loading = "rejected";
                 state.user = {}
                 state.error = action.error.message;
-                console.log('kkkk-err', action, state)
                 toast.error("user not found");
 
             });
@@ -109,6 +146,58 @@ const authSlice = createSlice(
                 state.user = {};
                 state.error = action.error.message
             })
+
+            // editUser
+
+            builder.addCase(editUser.pending, (state)=>{
+                state.loading = 'loading'
+            })
+
+            builder.addCase(editUser.fulfilled, (state,action)=>{
+                state.loading = 'success';
+                state.user = action.payload?.user;
+                localStorage.setItem('userinfo', JSON.stringify(state.user));
+                toast.success("updated successfully");
+                state.error = '';
+            })
+
+            builder.addCase(editUser.rejected, (state,action)=>{
+                state.loading = 'failed';
+                state.error = action.error;
+            })
+
+            //followUser
+
+            builder.addCase(followUser.fulfilled, (state,action)=>{
+                state.loading='success';
+                state.user.follwing = [...state?.user?.following, action.payload];
+                console.log('hhh-fol', action.payload)
+                state.error = '';
+            })
+
+            builder.addCase(followUser.rejected, (state,action)=>{
+                state.loading='rejected';
+                state.error = action.error
+            })
+
+            //unfollow User
+
+            builder.addCase(unFollowUser.fulfilled, (state,action)=>{
+                state.loading='success';
+                state.user.following = state.user.following.filter(
+                    (item) => item.username !== action.payload?.username
+                  );
+                console.log('hhhh-un', action.payload)
+                state.error = '';
+            })
+
+            builder.addCase(unFollowUser.rejected, (state,action)=>{
+                state.loading='rejected';
+                state.error = action.error;
+
+            })
+
+
 
         }
     }

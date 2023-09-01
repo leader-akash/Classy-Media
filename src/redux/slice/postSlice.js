@@ -177,7 +177,6 @@ const PostSlice = createSlice({
     builder.addCase(getAllPostsByUsername.fulfilled, (state, action) => {
       state.loading = 'success';
       state.postByUsername = action.payload;
-      console.log('aaaaaa', action)
     })
 
     builder.addCase(getAllPostsByUsername.rejected, (state, action) => {

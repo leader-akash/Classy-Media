@@ -1,5 +1,6 @@
 import { v4 as uuid } from "uuid";
 import { formatDate } from "../utils/authUtils";
+
 /**
  * User Database can be added here.
  * You can add default users of your wish with different attributes
@@ -18,7 +19,7 @@ export const users = [
     link: "https://news.microsoft.com/exec/satya-nadella/",
     bio: "Chairman and CEO of Microsoft Corporation",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/20571756/1553288451/1500x500",
+      "https://media.istockphoto.com/id/1354846583/photo/microsoft-france-headquarters-entrance-in-issy-les-moulineaux-near-paris.jpg?s=612x612&w=0&k=20&c=qp3gYZx05398hv3BLzBIMRhm8MoxLzPxs6V7Xr2oIeE=",
     userPhoto:
       "https://pbs.twimg.com/profile_images/1221837516816306177/_Ld4un5A_400x400.jpg",
     createdAt: formatDate(),
@@ -33,12 +34,12 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
-    link: "https://github.com/VLeads/",
+    link: "https://github.com/leader-akash",
     coverPhoto:
-      "https://raw.githubusercontent.com/VLeads/RapidFire/dev/src/assets/images/result-bg.jpg",
+      "https://www.shutterstock.com/shutterstock/videos/1096669817/thumb/9.jpg?ip=x480",
     userPhoto:
       "https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg",
-    bio: "Aspiring Full Stack developer 👨‍💻 | learning and sharing | neogcamp",
+    bio: "Aspiring Full Stack developer 👨‍💻 | learning and sharing",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -53,7 +54,7 @@ export const users = [
     bookmarks: [],
     link: "https://www.spacex.com/",
     coverPhoto:
-      "https://pbs.twimg.com/profile_banners/44196397/1576183471/1500x500",
+      "https://imageio.forbes.com/specials-images/imageserve/64c0eee9b26575296516a7fe/TOPSHOT-US-SPACE-SPACEX-STARSHIP/0x0.jpg?crop=3100,1745,x1433,y2273,safe&height=400&width=711&fit=bounds",
     userPhoto:
       "https://archinect.imgix.net/uploads/9h/9h2z333wsybwd4z0.jpg?auto=compress%2Cformat",
     bio: "Revolutionizing the world |Owns Tesla, SpaceX, Hyperloop, Starlink etc.",
@@ -69,9 +70,9 @@ export const users = [
     followers: [],
     following: [],
     bookmarks: [],
-    link: "https://github.com/VLeads/",
+    link: "https://github.com/leader-akash",
     coverPhoto:
-      "https://raw.githubusercontent.com/VLeads/RapidFire/dev/src/assets/images/result-bg.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMOFInXC9tNcu1-g1pVY6mI4aJTMEjjTtMnuBb1PbOYw&s",
     userPhoto:
       "https://pbs.twimg.com/profile_images/864282616597405701/M-FEJMZ0_400x400.jpg",
     bio: "CEO,  Google and Alphabet",

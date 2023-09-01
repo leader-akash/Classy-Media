@@ -1,0 +1,14 @@
+.error-page{
+    color: var(--white-color);
+    font-size: 22px;
+    text-align: center;
+    margin-top: 6rem;
+}
+.err-container{
+    text-align: center;
+}
+
+.err-btn{
+    margin-top: 2rem;
+    cursor: pointer;
+}

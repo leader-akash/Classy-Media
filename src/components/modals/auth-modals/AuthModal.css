@@ -2,6 +2,9 @@
     background-color: transparent;
 }
 
+.textarea-input{
+    width: 85%;   
+}
 
 
 .react-responsive-modal-modal { 

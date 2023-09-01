@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from 'react'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../../../redux/slice/authSlice';
 
 const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const [usernameVal, setUsernameVal] = useState('');
   const [passwordVal, setPasswordVal] = useState('');
+  const {token} = useSelector((state)=>state.auth);
 
   const dispatch = useDispatch();
+
+  const from = location.state?.from?.pathname || '/home'
+
+  useEffect(()=>{
+    token && navigate(from, {replace: true});
+  },[token])
 
   const handleUsername = (e) => {
     setUsernameVal(e.target.value);
@@ -43,7 +51,7 @@ const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
     e.preventDefault();
     console.log('abc', data)
     dispatch(loginUser(data))
-    navigate("/home");
+    // navigate("/home");
 
   }
 
@@ -51,7 +59,7 @@ const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
   const handleLoginAsGuest = (e) => {
     e.preventDefault();
     dispatch(loginUser({ username: 'akash123', password: 'akash123' }))
-    navigate("/home");
+    // navigate("/home");
   }
 
   return (
