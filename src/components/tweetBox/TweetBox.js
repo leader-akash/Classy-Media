@@ -3,6 +3,7 @@ import "./TweetBox.css";
 import axios from 'axios';
 import { createPost } from '../../redux/slice/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import avatar from '../../assets/avatar.png'
 
 const TweetBox = () => {
 
@@ -36,7 +37,13 @@ const TweetBox = () => {
   return (
     <form className='tweet-container' onSubmit={handleSubmit}>
         <div>
-            <img className='tweet-img' src="https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg" alt="img" />
+        {user?.userPhoto ?
+            <img className='tweet-img' src={user?.userPhoto} alt="img"  loading='lazy'/>
+            :
+            <img className='tweet-img' src={avatar} alt="img" loading='lazy'/>
+        }
+        {/* <img className='tweet-img' src={user?.userPhoto} alt="img"  loading='lazy'/> */}
+
         </div>
         {/* <form> */}
         <div>

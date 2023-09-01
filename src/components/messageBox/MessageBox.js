@@ -4,6 +4,7 @@ import { toast } from 'react-toastify';
 import { deletePostById, dislikePost, likePost } from '../../redux/slice/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { bookmarkPost, removeBookmark } from '../../redux/slice/bookmarkSlice';
+import avatar from  '../../assets/avatar.png'
 
 const MessageBox = ({ details }) => {
 
@@ -43,15 +44,21 @@ const MessageBox = ({ details }) => {
   return (
     <div className='message-container'>
       <div>
+      {
+        details?.userPhoto ?
         <img className='msg-img' src={details?.userPhoto} alt="img" />
-        {/* <img className='msg-img' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZcAWjfimDKnKCj3C-Jv4NZLaGIOLxtuwGr3IcLDQ4&s" alt="img" /> */}
+        :
+        <img className='msg-img' src={avatar} alt="img" />
+      }
+      {/* <img className='msg-img' src={details?.userPhoto} alt="img" /> */}
+
       </div>
       <div className='msg-input'>
         <div className="msg-sender">
-          <p className='post-user'>
+          <div className='post-user'>
             <p className='msg-id'>{details?.firstName}</p>
             <p className='msg-id-two'>@{details?.username}</p>
-          </p>
+          </div>
           {
             user?.username === details?.username ?
               <p>

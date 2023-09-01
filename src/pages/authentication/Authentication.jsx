@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import "./Authentication.css"
 import { Link } from 'react-router-dom';
 import logo from "../../assets/logo.png"
-import LoginModal from '../../components/auth-modals/LoginModal';
-import SignupModal from '../../components/auth-modals/SignupModal';
+import LoginModal from '../../components/modals/auth-modals/LoginModal';
+import SignupModal from '../../components/modals/auth-modals/SignupModal';
 
 const Authentication = () => {
 

@@ -90,3 +90,52 @@ export const getAllUserBookmarksApi = (token) => {
         }
     })
 }
+
+
+//  users api 
+
+    //  all users
+
+export const getAllUsersApi = () => {
+    return axios.get(`/api/users`);
+} 
+
+export const getUserByIdApi = (userId) => {
+    return axios.get(`/api/users/${userId}`);
+}
+
+//edit user
+
+export const editUserApi = (token, userData) =>{
+    return axios.post(`/api/users/edit`,
+    {
+        userData
+    }, {
+        headers: {
+            authorization: token
+        }
+    })
+}
+
+//follow/unfollow
+
+export const followUserApi = (token, followUserId) => {
+    return axios.post(`/api/users/follow/${followUserId}`,
+    {},
+    {
+        headers:{
+            authorization: token
+        }
+    })
+}
+
+export const unFollowUserApi = (token, followUserId) => {
+    return axios.post(`/api/users/unfollow/${followUserId}`,
+    {},
+    {
+        headers:{
+            authorization: token
+        }
+    })
+}
+

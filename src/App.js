@@ -8,18 +8,26 @@ import Homepage from "./pages/homepage/Homepage";
 import Explore from "./pages/explorePage/Explore";
 import Bookmark from "./pages/bookmarkPage/Bookmark";
 import Profile from "./pages/profile/Profile";
+import RequireAuth from "./components/route/RequireAuth";
+import PageNotFound from "./pages/pageNotFound/PageNotFound";
 
 function App() {
+
+ 
   return (
     <div className="App">
         {/* <Authentication /> */}
 
         <Routes>
           <Route path="/" element={<Authentication /> } />
+          <Route element={<RequireAuth />} >
           <Route path="/home" element={<Homepage /> } />
           <Route path="/explore" element={<Explore /> } />
           <Route path="/bookmarks" element={<Bookmark /> } />
-          <Route path="/profile" element={<Profile /> } />
+          {/* <Route path={`/profile`} element={<Profile /> } /> */}
+          <Route path={`/profile/:username`} element={<Profile /> } />
+          <Route path="*" element={<PageNotFound /> } />
+          </Route>
         <Route path="/mockman" element={<Mockman />} />
         </Routes>
         <ToastContainer

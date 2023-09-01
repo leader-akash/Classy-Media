@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
-import { Link, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import "./AuthModal.css"
-import { toast } from 'react-toastify';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { signup } from '../../redux/slice/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { signup } from '../../../redux/slice/authSlice';
 
 const SignupModal = ({ signupOpen, openModal, closeSignupModal }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -24,6 +23,15 @@ const SignupModal = ({ signupOpen, openModal, closeSignupModal }) => {
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   }, [])
+
+  const {token} = useSelector((state)=>state.auth);
+
+  const from = location.state?.from?.pathname || '/home'
+
+  useEffect(()=>{
+    token && navigate(from, {replace: true});
+
+  },[token]);
 
   const handlePasswordVisible = () => {
     setIsPasswordVisible(prev => !prev)
