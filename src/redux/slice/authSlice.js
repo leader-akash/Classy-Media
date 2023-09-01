@@ -92,10 +92,11 @@ const authSlice = createSlice(
 
             builder.addCase(signup.fulfilled, (state, action) => {
                 console.log('sss', action)
-                state.token = action.payload.encodedToken;
+                state.token = action.payload?.encodedToken;
                 localStorage.setItem("token", action.payload.encodedToken);
 
-                state.user = action.payload.createdUser;
+                state.user = action.payload?.createdUser;
+                console.log('userrr', action.payload);
                 localStorage.setItem("userinfo", JSON.stringify(state.user));
                 toast.success("Loggedin Successfully");
                 state.loading = 'success';

@@ -28,8 +28,8 @@ const TweetBox = () => {
         e.preventDefault();
         
         dispatch(createPost({
-            firstName: user.firstName,
-            userPhoto: user.userPhoto,
+            firstName: user?.firstName,
+            userPhoto: user?.userPhoto,
             content: textVal,
         }))
         setTextVal('');
