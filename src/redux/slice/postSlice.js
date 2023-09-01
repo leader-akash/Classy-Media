@@ -21,7 +21,7 @@ export const createPost = createAsyncThunk(
       return res?.data?.posts?.reverse();
     }
     catch (err) {
-      toast.error('unable to post');
+      // toast.error('unable to post');
     }
   }
 )
@@ -32,7 +32,7 @@ export const getPost = createAsyncThunk('post/getPost', async (postId) => {
     return res?.data?.post
   }
   catch (err) {
-    toast.error('Unable to get post');
+    // toast.error('Unable to get post');
   }
 })
 
