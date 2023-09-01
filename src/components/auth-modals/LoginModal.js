@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../contexts/user-context';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';

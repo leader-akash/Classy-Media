@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import logo from "../../assets/logo.png"
 import "./LeftSidebar.css"
 import { useNavigate } from 'react-router-dom';
-import { useUser } from '../../contexts/user-context';
 import { logoutHandler } from '../../redux/slice/authSlice';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,7 +9,6 @@ import { useDispatch, useSelector } from 'react-redux';
 const LeftSidebar = () => {
 
   const [boxOpen, setBoxOpen] = useState(false);
-  const {setGetToken} = useUser();
 
   const dispatch = useDispatch();
 
@@ -18,10 +16,13 @@ const LeftSidebar = () => {
 
   // const userInfo = JSON.parse(user);
 
-  const {user} = useSelector((state)=> state.auth)
+  const {user} = useSelector((state)=> state.auth);
+
+  console.log('userrr', user)
 
   const navigate = useNavigate();
 
+ 
 
   const handleLogout = () => {
     dispatch(logoutHandler());

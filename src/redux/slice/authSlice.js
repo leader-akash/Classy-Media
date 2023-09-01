@@ -4,7 +4,7 @@ import { loginApi, signupApi } from "../../apis/apis";
 
 const initialState = {
     status: 'idle',
-    user: {},
+    user: (localStorage.getItem('userinfo') && JSON.parse(localStorage.getItem('userinfo')))|| {},
     error: "",
     token: localStorage.getItem("token") || "",
 }

@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
 import "./TweetBox.css";
 import axios from 'axios';
-import { useUser } from '../../contexts/user-context';
-import { usePost } from '../../contexts/post-context';
 import { createPost } from '../../redux/slice/postSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 
 const TweetBox = () => {
 
     const [textLimit, setTextLimit] = useState(210);
-    const {getToken} = useUser();
     // const {postData, setPostData, textVal, setTextVal, handleTweet} = usePost();
     const [textVal, setTextVal] = useState("");
     

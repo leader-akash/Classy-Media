@@ -5,7 +5,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import "./AuthModal.css"
 import { toast } from 'react-toastify';
 import axios from 'axios';
-import { useUser } from '../../contexts/user-context';
 import { useDispatch } from 'react-redux';
 import { signup } from '../../redux/slice/authSlice';
 
@@ -21,7 +20,6 @@ const SignupModal = ({ signupOpen, openModal, closeSignupModal }) => {
   const [passwordVal, setPasswordVal] = useState();
   const [confirmPasswordVal, setConfirmPasswordVal] = useState();
   const [isPasswordMatch, setIsPasswordMatch] = useState(false);
-  const { setGetToken } = useUser();
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });

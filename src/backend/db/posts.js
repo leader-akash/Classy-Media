@@ -41,7 +41,7 @@ export const posts = [
       "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
     firstName: "Akash ",
     lastName: "Kumar",
-    username: "Akash123",
+    username: "akash123",
     userPhoto:
       "https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg",
     createdAt: formatDate(),
@@ -78,7 +78,7 @@ export const posts = [
     postPic: "",
     firstName: "Akash ",
     lastName: "Kumar",
-    username: "Akash123",
+    username: "akash123",
     userPhoto:
       "https://pbs.twimg.com/profile_images/1514842645260292097/dPW4KAZA_400x400.jpg",
     createdAt: formatDate(),
