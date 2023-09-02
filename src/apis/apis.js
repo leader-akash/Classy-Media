@@ -10,25 +10,25 @@ export const signupApi = (data) => {
 }
 
 export const createPostApi = (token, postData) => {
-    return axios.post(`api/posts`,{
+    return axios.post(`api/posts`, {
         postData
-    },{
+    }, {
         headers: {
             authorization: token,
         },
-    })    
+    })
 }
 
-export const getPostByIdApi = (postId)=>{
+export const getPostByIdApi = (postId) => {
     return axios.get(`/api/posts/${postId}`)
 }
 
-export const getAllPostsApi = ()=>{
+export const getAllPostsApi = () => {
     return axios.get(`/api/posts`)
 }
 
 export const deletePostByIdApi = (token, postId) => {
-    return axios.delete(`/api/posts/${postId}`,{
+    return axios.delete(`/api/posts/${postId}`, {
         headers: {
             authorization: token
         }
@@ -44,47 +44,47 @@ export const getPostByUsername = (username) => {
 // like apis
 
 export const likePostByIdApi = (token, postId) => {
-    console.log('ppppp', postId, token)
+    
     return axios.post(`/api/posts/like/${postId}`,
-    {},{
+        {}, {
         headers: {
             authorization: token
         }
     })
-   
-} 
+
+}
 
 export const DeleteLikedPostByIdApi = (token, postId) => {
-    return axios.post(`/api/posts/dislike/${postId}`,{},{
+    return axios.post(`/api/posts/dislike/${postId}`, {}, {
         headers: {
             authorization: token
         }
     })
-} 
+}
 
 // bookmarks api
 export const bookmarkByIdApi = (token, postId) => {
-    return axios.post(`/api/users/bookmark/${postId}`, 
-    {},
-     {
-        headers: {
-            authorization: token
-        }
-    })
+    return axios.post(`/api/users/bookmark/${postId}`,
+        {},
+        {
+            headers: {
+                authorization: token
+            }
+        })
 }
 
 export const deleteBookmarkByIdApi = (token, postId) => {
     return axios.post(`/api/users/remove-bookmark/${postId}`,
-    {}, 
-    {
-        headers: {
-            authorization: token
-        }
-    })
+        {},
+        {
+            headers: {
+                authorization: token
+            }
+        })
 }
 
 export const getAllUserBookmarksApi = (token) => {
-    return axios.get(`/api/users/bookmark/`,{
+    return axios.get(`/api/users/bookmark/`, {
         headers: {
             authorization: token
         }
@@ -94,11 +94,11 @@ export const getAllUserBookmarksApi = (token) => {
 
 //  users api 
 
-    //  all users
+//  all users
 
 export const getAllUsersApi = () => {
     return axios.get(`/api/users`);
-} 
+}
 
 export const getUserByIdApi = (userId) => {
     return axios.get(`/api/users/${userId}`);
@@ -106,11 +106,11 @@ export const getUserByIdApi = (userId) => {
 
 //edit user
 
-export const editUserApi = (token, userData) =>{
+export const editUserApi = (token, userData) => {
     return axios.post(`/api/users/edit`,
-    {
-        userData
-    }, {
+        {
+            userData
+        }, {
         headers: {
             authorization: token
         }
@@ -121,21 +121,52 @@ export const editUserApi = (token, userData) =>{
 
 export const followUserApi = (token, followUserId) => {
     return axios.post(`/api/users/follow/${followUserId}`,
-    {},
-    {
-        headers:{
-            authorization: token
-        }
-    })
+        {},
+        {
+            headers: {
+                authorization: token
+            }
+        })
 }
 
 export const unFollowUserApi = (token, followUserId) => {
     return axios.post(`/api/users/unfollow/${followUserId}`,
-    {},
-    {
-        headers:{
-            authorization: token
-        }
-    })
+        {},
+        {
+            headers: {
+                authorization: token
+            }
+        })
 }
 
+
+// comment section
+
+
+export const getCommentsByPostIdApi = (postId) => {
+    return axios.get(`/api/comments/${postId}`);
+  };
+  
+  export const addCommentByPostIdApi = (token, data) => {
+    return axios.post(
+      `/api/comments/add/${data?.id}`,
+      { commentData: data },
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+  };
+
+  export const deleteCommentByPostIdCommentIdApi = (token, postId, commentId) => {
+    return axios.post(
+      `/api/comments/delete/${postId}/${commentId}`,
+      {},
+      {
+        headers: {
+          authorization: token,
+        },
+      }
+    );
+  };

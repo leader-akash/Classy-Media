@@ -6,16 +6,14 @@ import "./EditModal.css"
 // import "../auth-modals/AuthModal.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { editUser } from '../../../redux/slice/authSlice';
+import avatar from '../../../assets/avatar.png'
 
 const EditModal = ({ editOpen, openEditModal, closeEditModal }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const {user} = useSelector((state)=> state.auth);
-
-  const [usernameVal, setUsernameVal] = useState();
-  const [passwordVal, setPasswordVal] = useState();
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -27,18 +25,13 @@ const EditModal = ({ editOpen, openEditModal, closeEditModal }) => {
 
   const [bio, setBio] = useState(user?.bio);
 
-  const handlePassword = (e) => {
-    setPasswordVal(e.target.value);
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    dispatch(editUser({ firstName: nameVal, link: bioLink, bio: bio }));
+    closeEditModal();
   }
 
-const handleUpdate = (e) => {
 
-  e.preventDefault();
-  dispatch(editUser({firstName: nameVal, link: bioLink, bio: bio }));
-  closeEditModal();
- }
-
-  
 
 
   return (
@@ -46,18 +39,43 @@ const handleUpdate = (e) => {
 
       <div className="input-container signup-form">
         <h2 className='login-header'>Edit Profile</h2>
-        <form id="signupForm" onSubmit={(e)=>handleUpdate(e)}>
+        <form  className='edit-user-form' onSubmit={(e) => handleUpdate(e)}>
+          <div className='bg-edit-cover'>
+          {
+            user?.coverPhoto ?
+            <img className='edit-bg-img' src={user?.coverPhoto} alt='bg-img' />
+            :
+            <img className='edit-bg-img' src='https://static.vecteezy.com/system/resources/thumbnails/006/277/661/small/studio-empty-background-wall-and-floor-grunge-texture-cement-concrete-display-scene-free-photo.jpg' alt='bg-img' />
+          }
+          </div>
+          <p>
+          <i class="fas fa-camera edit-bg-camera"></i>
+          </p>
           <div>
-            <label className="form-inputs"> Name </label>
+          {
+            user?.userPhoto ?
+            
+            <img  className='edit-user-img' src={user?.userPhoto} alt='img' />
+            :
+            
+            <img className='edit-user-img' src={avatar} alt='img' />
+
+          }
+          <p>
+          <i class="fas fa-camera edit-camera"></i>
+          </p>
+          </div>
+          <div>
+            <label className="form-inputs label-name"> Name </label>
             <input className='input-box' type="text" id="fullName" placeholder="Akash" value={nameVal} onChange={(e) => setNameVal(e.target.value)} />
           </div>
           <div>
-            <label className="form-inputs" > Bio Link </label>
+            <label className="form-inputs label-name" > Bio Link </label>
             <input className='input-box' value={bioLink} onChange={(e) => setBioLink(e.target.value)} />
           </div>
           <div>
-            <label className="form-inputs"> Bio </label>
-            <textarea className='input-box textarea-input'  rows={1} cols={1}  value={bio} onChange={(e) => setBio(e.target.value)}/>
+            <label className="form-inputs label-name"> Bio </label>
+            <textarea className='input-box textarea-input' rows={2} cols={1} value={bio} onChange={(e) => setBio(e.target.value)} />
           </div>
 
           <div>

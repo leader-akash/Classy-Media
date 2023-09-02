@@ -128,12 +128,10 @@ const authSlice = createSlice(
             // signup
 
             builder.addCase(signup.fulfilled, (state, action) => {
-                console.log('sss', action)
                 state.token = action.payload?.encodedToken;
                 localStorage.setItem("token", action.payload.encodedToken);
 
                 state.user = action.payload?.createdUser;
-                console.log('userrr', action.payload);
                 localStorage.setItem("userinfo", JSON.stringify(state.user));
                 toast.success("Loggedin Successfully");
                 state.loading = 'success';
@@ -155,7 +153,7 @@ const authSlice = createSlice(
 
             builder.addCase(editUser.fulfilled, (state,action)=>{
                 state.loading = 'success';
-                state.user = action.payload?.user;
+                state.user = action.payload;
                 localStorage.setItem('userinfo', JSON.stringify(state.user));
                 toast.success("updated successfully");
                 state.error = '';
@@ -171,7 +169,7 @@ const authSlice = createSlice(
             builder.addCase(followUser.fulfilled, (state,action)=>{
                 state.loading='success';
                 state.user.follwing = [...state?.user?.following, action.payload];
-                console.log('hhh-fol', action.payload)
+                
                 state.error = '';
             })
 
@@ -187,7 +185,6 @@ const authSlice = createSlice(
                 state.user.following = state.user.following.filter(
                     (item) => item.username !== action.payload?.username
                   );
-                console.log('hhhh-un', action.payload)
                 state.error = '';
             })
 

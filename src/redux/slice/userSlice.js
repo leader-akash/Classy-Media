@@ -9,10 +9,8 @@ const initialState = {
 }
 
 export const getAllUsers = createAsyncThunk('users/getAllUsers', async()=>{
-    console.log('ppppppp')
     try{
         const res = await getAllUsersApi();
-        console.log('rrrr', res)
         return res?.data?.users
     }
     catch(err){
@@ -25,7 +23,6 @@ export const getUserById = createAsyncThunk('users/getUserById', async(userId, {
     try{
         const token = localStorage.getItem('userinfo');
         const res = await getUserByIdApi(token, userId);
-        console.log('fff',res)
         return res?.data?.user
     }
     catch(err){
@@ -49,7 +46,6 @@ const userSlice = createSlice({
 
         builder.addCase(getAllUsers.fulfilled, (state,action)=>{
             state.loading = 'success';
-            console.log('payllll', action.payload)
             state.usersData = action.payload;
         })
 

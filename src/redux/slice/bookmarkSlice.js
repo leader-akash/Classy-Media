@@ -13,7 +13,6 @@ export const bookmarkPost = createAsyncThunk('bookmark/bookmarkPost', async (pos
     try{
       const token = localStorage.getItem('token');
       const res = await bookmarkByIdApi(token, postId);
-      console.log('111', res)
       return res?.data?.bookmarks?.reverse();
     } 
     catch(err){
@@ -63,7 +62,7 @@ const bookmarkSlice = createSlice({
     builder.addCase(bookmarkPost.rejected, (state,action)=> {
       state.loading = 'rejected';
       state.error = action.error;
-      console.log('bookmark-err-builder', action)
+      
     })
 
 
@@ -82,7 +81,6 @@ const bookmarkSlice = createSlice({
     builder.addCase(removeBookmark.rejected, (state,action)=> {
       state.loading = 'rejected';
       state.error= action.error;
-      console.log('action', action)
     })
 
     // get all bookmarks
@@ -100,7 +98,6 @@ const bookmarkSlice = createSlice({
     builder.addCase(getAllBookmarks.rejected, (state,action)=> {
       state.loading = 'rejected';
       state.error= action.error;
-      console.log('action', action);
     })
 
 

@@ -72,7 +72,7 @@ export const users = [
     bookmarks: [],
     link: "https://github.com/leader-akash",
     coverPhoto:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMOFInXC9tNcu1-g1pVY6mI4aJTMEjjTtMnuBb1PbOYw&s",
+      "https://images.unsplash.com/photo-1678483790053-71367bc7a02c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     userPhoto:
       "https://pbs.twimg.com/profile_images/864282616597405701/M-FEJMZ0_400x400.jpg",
     bio: "CEO,  Google and Alphabet",

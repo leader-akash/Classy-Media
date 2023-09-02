@@ -11,7 +11,10 @@ const Bookmark = () => {
 
   const {bookmarks} = useSelector((state)=> state.bookmark);
 
-  
+  useEffect(() => {
+    window.scrollTo({top: 0 , left: 0, behaviour : 'smooth'})
+  }, [])
+
 
   const dispatch = useDispatch();
 

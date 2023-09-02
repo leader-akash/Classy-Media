@@ -17,6 +17,7 @@
     position: absolute;
     top: 15px;
     margin-left: 5px;
+    cursor: pointer;
 }
 
 .msg-input{
