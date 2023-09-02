@@ -106,9 +106,10 @@ console.log('testing', location)
 
       <div className='profile-msg-box'>
         {
-          postByUsername?.map((el) => (
+          postByUsername?.map((el,i) => (
             <MessageBox
               details={el}
+              key={i}
             />
           ))
         }

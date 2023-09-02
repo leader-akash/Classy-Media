@@ -24,7 +24,9 @@ const CommentModal = ({ openComment, setOpenComment, details, setCommentSent, co
     setCommentSent(true)
     e.preventDefault();
     dispatch(addCommentByPostId({
-      comment: {
+      comment: {  
+        firstName: user?.firstName, 
+        username: user?.username,
         commentVal,
         avatar: user?.userPhoto,
       },
@@ -69,8 +71,8 @@ const CommentModal = ({ openComment, setOpenComment, details, setCommentSent, co
                   :
                   <img className='reply-img' src={avatar} alt='img' onClick={() => navigate(`/profile/${details?.comments?.username}`)} />
               }
-              <p className='reply-user'>{el?.firstName}</p>
-              <p className='reply-username'>{el?.username}</p>
+              <p className='reply-user'>{el?.comment?.firstName}</p>
+              <p className='reply-username'>{el?.comment?.username}</p>
               </div>
               <div className='comment-msg'>{el?.comment?.commentVal}</div>
             </div>
