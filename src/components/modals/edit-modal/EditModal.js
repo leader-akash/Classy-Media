@@ -25,45 +25,90 @@ const EditModal = ({ editOpen, openEditModal, closeEditModal }) => {
 
   const [bio, setBio] = useState(user?.bio);
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    dispatch(editUser({ firstName: nameVal, link: bioLink, bio: bio }));
-    closeEditModal();
+
+
+  // image
+
+  const [selectUserImg, setSelectUserImg] = useState();
+  const [selectBgImg, setSelectBgImg] = useState();
+
+
+
+  const handleUserImage = async (e, selectedFunction) => {
+    const file = e.target?.files[0];
+    const toBase64 = (file) =>
+
+      new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = (err) => reject(err);
+      });
+
+    try {
+      let base64File = await toBase64(file);
+      selectedFunction(base64File);
+
+    }
+    catch (err) {
+      console.log('img-select-err', err)
+    }
   }
 
-
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(editUser({ firstName: nameVal, link: bioLink, bio: bio, userPhoto: selectUserImg, coverPhoto: selectBgImg }));
+    closeEditModal();
+  }
 
   return (
     <Modal classNames="edit-modal" open={editOpen} onClose={closeEditModal} center>
 
       <div className="input-container signup-form">
         <h2 className='login-header'>Edit Profile</h2>
-        <form  className='edit-user-form' onSubmit={(e) => handleUpdate(e)}>
+        <form className='edit-user-form' onSubmit={(e) => handleSubmit(e)}>
           <div className='bg-edit-cover'>
-          {
-            user?.coverPhoto ?
-            <img className='edit-bg-img' src={user?.coverPhoto} alt='bg-img' />
-            :
-            <img className='edit-bg-img' src='https://static.vecteezy.com/system/resources/thumbnails/006/277/661/small/studio-empty-background-wall-and-floor-grunge-texture-cement-concrete-display-scene-free-photo.jpg' alt='bg-img' />
-          }
+            {
+              selectBgImg ?
+                <img className='edit-bg-img' src={selectBgImg} alt='img' />
+                :
+                user?.coverPhoto ?
+                  <img className='edit-bg-img' src={user?.coverPhoto} alt='bg-img' />
+                  :
+                  <img className='edit-bg-img' src='https://static.vecteezy.com/system/resources/thumbnails/006/277/661/small/studio-empty-background-wall-and-floor-grunge-texture-cement-concrete-display-scene-free-photo.jpg' alt='bg-img' />
+            }
           </div>
           <p>
-          <i class="fas fa-camera edit-bg-camera"></i>
+            <label for='edit-choose-bg-img'>
+              <i class="fas fa-camera edit-bg-camera"></i>
+              <input type='file' id='edit-choose-bg-img'
+                style={{ display: 'none', visibility: 'none' }}
+                accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/jpg,image/webp"
+                onChange={(e) => handleUserImage(e, setSelectBgImg)}
+              />
+            </label>
           </p>
           <div>
-          {
-            user?.userPhoto ?
-            
-            <img  className='edit-user-img' src={user?.userPhoto} alt='img' />
-            :
-            
-            <img className='edit-user-img' src={avatar} alt='img' />
+            {
+              selectUserImg ?
+                <img className='edit-user-img' src={selectUserImg} alt='img' />
+                : user?.userPhoto
+                  ?
+                  <img className='edit-user-img' src={user?.userPhoto} alt='img' />
+                  :
+                  <img className='edit-user-img' src={avatar} alt='img' />
 
-          }
-          <p>
-          <i class="fas fa-camera edit-camera"></i>
-          </p>
+            }
+            <p>
+              <label for='edit-choose-user-img'>
+                <i class="fas fa-camera edit-camera"></i>
+                <input type='file' id='edit-choose-user-img'
+                  style={{ display: 'none', visibility: 'none' }}
+                  accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/jpg,image/webp"
+                  onChange={(e) => handleUserImage(e, setSelectUserImg)}
+                />
+              </label>
+            </p>
           </div>
           <div>
             <label className="form-inputs label-name"> Name </label>

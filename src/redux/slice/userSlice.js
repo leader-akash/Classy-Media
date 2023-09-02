@@ -11,6 +11,7 @@ const initialState = {
 export const getAllUsers = createAsyncThunk('users/getAllUsers', async()=>{
     try{
         const res = await getAllUsersApi();
+        console.log('rsssss', res?.data?.users)
         return res?.data?.users
     }
     catch(err){

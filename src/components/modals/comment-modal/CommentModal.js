@@ -62,10 +62,10 @@ const CommentModal = ({ openComment, setOpenComment, details, setCommentSent, co
           reversedComments && reversedComments.map((el) => (
             <div className='reply-msg'>
             <div className='reply-user-info'>
-            
+            {console.log('ccc', el)}
               {
                 el?.comment?.avatar ?
-                  <img className='reply-img' src={el?.comment?.avatar} alt='img' onClick={() => navigate(`/profile/${details?.comments?.username}`, { state: { username: user?.username } })} />
+                  <img className='reply-img' src={el?.comment?.avatar} alt='img' onClick={() => navigate(`/profile/${el?.username}` )} />
                   :
                   <img className='reply-img' src={avatar} alt='img' onClick={() => navigate(`/profile/${details?.comments?.username}`)} />
               }

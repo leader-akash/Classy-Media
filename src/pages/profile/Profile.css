@@ -9,6 +9,7 @@
 .bg-img{
     height: 230px;
     width: 100%;
+    padding: 0 5px;
     /* border: solid 1px white; */
     position: relative;
 }
@@ -19,7 +20,8 @@
 }
 
 .profile-image{
-    width: 20%;
+    width: 131px;
+    height: 131px;
     border-radius: 50%;
     margin-top: -70px;
     z-index: 1;

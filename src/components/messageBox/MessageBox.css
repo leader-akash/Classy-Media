@@ -10,6 +10,12 @@
     border-bottom: solid 2px var(--hover);
 }
 
+.post-message-img{
+    width: 90%;
+    height: 250px;
+    margin-top: 1rem;
+}
+
 .msg-img{
     width: 42px;
     height: 40px;
