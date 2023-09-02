@@ -9,6 +9,24 @@ import { formatDate } from "../utils/authUtils";
 export const users = [
   {
     _id: uuid(),
+    firstName: "Elon",
+    lastName: "Musk",
+    username: "elonmusk",
+    password: "12345678",
+    followers: [],
+    following: [],
+    bookmarks: [],
+    link: "https://www.spacex.com/",
+    coverPhoto:
+      "https://imageio.forbes.com/specials-images/imageserve/64c0eee9b26575296516a7fe/TOPSHOT-US-SPACE-SPACEX-STARSHIP/0x0.jpg?crop=3100,1745,x1433,y2273,safe&height=400&width=711&fit=bounds",
+    userPhoto:
+      "https://archinect.imgix.net/uploads/9h/9h2z333wsybwd4z0.jpg?auto=compress%2Cformat",
+    bio: "Revolutionizing the world |Owns Tesla, SpaceX, Hyperloop, Starlink etc.",
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
+  {
+    _id: uuid(),
     firstName: "Satya",
     lastName: "Nadella",
     username: "satyanadella",
@@ -43,24 +61,7 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
-  {
-    _id: uuid(),
-    firstName: "Elon",
-    lastName: "Musk",
-    username: "elonmusk",
-    password: "12345678",
-    followers: [],
-    following: [],
-    bookmarks: [],
-    link: "https://www.spacex.com/",
-    coverPhoto:
-      "https://imageio.forbes.com/specials-images/imageserve/64c0eee9b26575296516a7fe/TOPSHOT-US-SPACE-SPACEX-STARSHIP/0x0.jpg?crop=3100,1745,x1433,y2273,safe&height=400&width=711&fit=bounds",
-    userPhoto:
-      "https://archinect.imgix.net/uploads/9h/9h2z333wsybwd4z0.jpg?auto=compress%2Cformat",
-    bio: "Revolutionizing the world |Owns Tesla, SpaceX, Hyperloop, Starlink etc.",
-    createdAt: formatDate(),
-    updatedAt: formatDate(),
-  },
+  
   {
     _id: uuid(),
     firstName: "Sundar",

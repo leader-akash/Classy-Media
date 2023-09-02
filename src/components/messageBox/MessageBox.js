@@ -18,6 +18,7 @@ const MessageBox = ({ details }) => {
     (state) => state.post
   );
 
+  console.log('pottttt', posts)
   const { bookmarks } = useSelector((state) => state.bookmark);
 
   const [openComment, setOpenComment] = useState(false)
@@ -48,7 +49,7 @@ const MessageBox = ({ details }) => {
     if (loading === 'idle') {
       dispatch(getCommentsByPostId(details?._id));
     }
-    setCommentSent(false)
+    setCommentSent(false) 
   }, [details, openComment])
 
   const [commentVal, setCommentVal] = useState('');
@@ -97,7 +98,14 @@ const MessageBox = ({ details }) => {
 
         </div>
         <p className='msg-text'>{details.content}</p>
-
+          <div>
+          {
+            details?.postPic ?
+            <img className='post-message-img' src={details?.postPic} alt='img' />
+            :
+            ''
+          }
+          </div>
         <div className='msg-icons'>
 
           {details?.likes?.likedBy.length !== 0 &&

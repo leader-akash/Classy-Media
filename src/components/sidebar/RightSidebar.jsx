@@ -20,9 +20,10 @@ const RightSidebar = () => {
 
   useEffect(() => {
     dispatch(getAllUsers())
-  }, [])
+  }, [user?.following])
 
-
+console.log('userrrrr', user)
+console.log('userrrrr-user', usersData)
 
   return (
     <div className='right-sidebar'>
@@ -31,36 +32,53 @@ const RightSidebar = () => {
 
         {
           usersData.filter((el, i) => el?.username !== user?.username).map((currentUser, i) => (
-            <div key={i} className='profile-settings right-profile' onClick={() => navigate(`/profile/${currentUser?.username}`, { state: { username: currentUser?.username } })}>
-              {
-                currentUser?.userPhoto ?
-                  <img className='right-profile-img' src={currentUser?.userPhoto} alt="profile-img" loading='lazy' />
-                  :
-                  <img className='right-profile-img' src={avatar} alt="profile-img" loading='lazy' />
-
-              }
-              <div className='right-profile-info'>
-                <p className='right-profile-name'>{currentUser?.firstName}</p>
-                <small className='right-profile-id'>@{currentUser?.username}</small>
-              </div>
-
-              <div className='follow-unf-btn'>
+            <div key={i} className='suggest-user'>
+              <div className='profile-settings right-profile' onClick={() => navigate(`/profile/${currentUser?.username}`, { state: { username: currentUser?.username } })}>
                 {
-                  user?.following?.length && user?.following?.some((followingUser) => followingUser?._id == currentUser?._id) ?
-
-                    (<button className='follow-btn unfollow-btn' onClick={() => {
-                      dispatch(unFollowUser(currentUser?._id));
-                      setFollow(false);
-                    }}>Following</button>)
+                  currentUser?.userPhoto ?
+                    <img className='right-profile-img' src={currentUser?.userPhoto} alt="profile-img" loading='lazy' />
                     :
-                    (<button className='follow-btn' onClick={() => {
-                      dispatch(followUser(currentUser?._id));
-                      setFollow(false);
-                    }}>Follow</button>)
+                    <img className='right-profile-img' src={avatar} alt="profile-img" loading='lazy' />
 
                 }
-              </div>
+                <div className='right-profile-info'>
+                  <p className='right-profile-name'>{currentUser?.firstName}</p>
+                  <small className='right-profile-id'>@{currentUser?.username}</small>
+                </div>
 
+                {/* <div className='follow-unf-btn'>
+                  {
+                    user?.following?.length && user?.following?.some((followingUser) => followingUser?._id == currentUser?._id) ?
+
+                      (<button className='follow-btn unfollow-btn' onClick={() => {
+                        dispatch(unFollowUser(currentUser?._id));
+                        setFollow(false);
+                      }}>Following</button>)
+                      :
+                      (<button className='follow-btn' onClick={() => {
+                        dispatch(followUser(currentUser?._id));
+                        setFollow(false);
+                      }}>Follow</button>)
+
+                  }
+                </div> */}
+              </div>
+              <div className='follow-unf-btn'>
+                  {
+                    user?.following?.length && user?.following?.some((el)=> el?.username === currentUser?.username ) ?
+
+                      (<button className='follow-btn unfollow-btn' onClick={() => {
+                        dispatch(unFollowUser(currentUser?._id));
+                        setFollow(false);
+                      }}>Following</button>)
+                      :
+                      (<button className='follow-btn' onClick={() => {
+                        dispatch(followUser(currentUser?._id));
+                        setFollow(false);
+                      }}>Follow</button>)
+                    
+                  }
+                </div>
             </div>
 
 

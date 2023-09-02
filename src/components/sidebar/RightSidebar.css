@@ -44,7 +44,7 @@
 
 .follow-btn{
     position: absolute;
-    right: 15px;
+    right: 21px;
     background-color: gold;
     border: none;
     height: 30px;
@@ -70,13 +70,13 @@
 
 .right-profile-img{
     width: 45px;
-    height: 42px;
+    height: 45px;
     border-radius: 50%;
 }
 
 .follow-unf-btn{
     position: absolute;
-    right: 2px;
+    right: 5px;
     top: 15px;
 }
 
@@ -91,4 +91,8 @@
 
 .connect-with-me:hover{
     color: #ccc;
+}
+
+.suggest-user {
+    position: relative;
 }

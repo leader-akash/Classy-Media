@@ -18,7 +18,7 @@ const Profile = () => {
   const { post: { postByUsername, error, loading }, auth: { user }, } = useSelector((state) => ({
     post: state.post, auth: state.auth
   }));
-  
+
   useEffect(() => {
     window.scrollTo({top: 0 , left: 0, behaviour : 'smooth'})
   }, [])
@@ -27,15 +27,15 @@ const Profile = () => {
   const { usersData } = useSelector((state) => state.user);
 
   const [singleUser, setSingleUser] = useState(user);
-
+console.log('testing', location)
   useEffect(() => {
     if (location?.state) {
       setSingleUser(usersData?.find((item) => item?.username === location?.state?.username));
-      dispatch(getAllPostsByUsername(location?.state?.username))
     } else {
       setSingleUser(user)
     }
-  }, [location, usersData, user, postByUsername])
+    dispatch(getAllPostsByUsername(location?.state?.username || user?.username))
+  }, [location, usersData, user])
 
 
   const dispatch = useDispatch();
@@ -44,8 +44,8 @@ const Profile = () => {
 
     setEditModalOpen(false);
   }
-  {console.log('postbyuser', postByUsername)}
 
+  console.log('single', singleUser, user)
 
   return (
     <div>
@@ -102,7 +102,7 @@ const Profile = () => {
 
       </div>  
 
-      {console.log('postby', postByUsername)}
+          {console.log('singlllll', singleUser)}
 
       <div className='profile-msg-box'>
         {

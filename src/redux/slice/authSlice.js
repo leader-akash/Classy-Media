@@ -168,7 +168,8 @@ const authSlice = createSlice(
 
             builder.addCase(followUser.fulfilled, (state,action)=>{
                 state.loading='success';
-                state.user.follwing = [...state?.user?.following, action.payload];
+                console.log('abbbb', action.payload)
+                state.user.following = [...state?.user?.following, action.payload];
                 
                 state.error = '';
             })
@@ -182,8 +183,8 @@ const authSlice = createSlice(
 
             builder.addCase(unFollowUser.fulfilled, (state,action)=>{
                 state.loading='success';
-                state.user.following = state.user.following.filter(
-                    (item) => item.username !== action.payload?.username
+                state.user.following = state.user?.following.filter(
+                    (item) => item?.username !== action.payload?.username
                   );
                 state.error = '';
             })
