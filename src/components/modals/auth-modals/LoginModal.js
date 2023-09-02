@@ -49,7 +49,7 @@ const LoginModal = ({ loginOpen, openLoginModal, closeLoginModal }) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('abc', data)
+  
     dispatch(loginUser(data))
     // navigate("/home");
 

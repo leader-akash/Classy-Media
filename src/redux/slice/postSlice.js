@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { DeleteLikedPostByIdApi, createPostApi, deletePostByIdApi, getAllPostsApi, getPostByIdApi, getPostByUsername, likePostByIdApi } from '../../apis/apis';
+import { DeleteLikedPostByIdApi, addCommentByPostIdApi, createPostApi, deleteCommentByPostIdCommentIdApi, deletePostByIdApi, getAllPostsApi, getCommentsByPostIdApi, getPostByIdApi, getPostByUsername, likePostByIdApi } from '../../apis/apis';
 import { toast } from 'react-toastify';
 
 
@@ -25,7 +25,7 @@ export const createPost = createAsyncThunk(
     }
   }
 )
-
+//here
 export const getPost = createAsyncThunk('post/getPost', async (postId) => {
   try {
     const res = await getPostByIdApi(postId);
@@ -50,7 +50,6 @@ export const deletePostById = createAsyncThunk('posts/deletepostById', async (po
   try {
     const token = localStorage.getItem("token");
     const res = await deletePostByIdApi(token, postId);
-    console.log('ffff', res);
     return res?.data?.posts?.reverse();
     
   }
@@ -74,9 +73,7 @@ export const getAllPostsByUsername = createAsyncThunk('posts/getAllPostsByUserna
 export const likePost = createAsyncThunk('post/likePost', async (postId, {rejectWithValue}) => {
   try{
     const token = localStorage.getItem('token');
-    console.log('tttttt', token)
     const res = await likePostByIdApi(token, postId);
-    console.log('like-ress', res)
     return res?.data?.posts?.reverse();
   }
   catch(err){
@@ -96,6 +93,58 @@ export const dislikePost = createAsyncThunk('post/dislikePost', async (postId, {
   }
 });
 
+// add Comment
+export const addCommentByPostId = createAsyncThunk(
+  "posts/addCommentByPostId",
+  async (data, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await addCommentByPostIdApi(token, data);
+      toast.success("comment added successfully!");
+      return res?.data?.posts?.reverse();
+
+    } catch (error) {
+      console.log("com-err", data);
+      return rejectWithValue(error);
+    }
+  })
+
+// get comments
+export const getCommentsByPostId = createAsyncThunk(
+  "posts/getCommentsByPostId",
+  async (postId, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await getCommentsByPostIdApi(token, postId);
+      console.log('comm-res', res)
+      return res?.data?.comments?.reverse();
+    } catch (error) {
+      console.log('comm-err', error)
+      return rejectWithValue(error);
+    }
+  }
+);
+
+// delete comments
+export const deleteCommentByPostIdCommentId = createAsyncThunk(
+  "posts/deleteCommentByPostIdCommentId",
+  async ({ postId, commentId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await deleteCommentByPostIdCommentIdApi(
+        token,
+        postId,
+        commentId
+      );
+
+      return response?.data?.posts?.reverse();
+    } catch (error) {
+      return rejectWithValue(error);
+    }
+  }
+);
+
+
 
 
 const PostSlice = createSlice({
@@ -104,8 +153,8 @@ const PostSlice = createSlice({
   reducers: {},
 
   extraReducers: (builder) => {
+    
     // create post
-
     builder.addCase(createPost.pending, (state) => {
       state.loading = 'loading'
     });
@@ -129,6 +178,7 @@ const PostSlice = createSlice({
     builder.addCase(getPost.fulfilled, (state, action) => {
       state.postActionLoading = "success";
       state.currentPost = action.payload;
+      console.log('ggggggggg', action.payload)
     })
 
     builder.addCase(getPost.rejected, (state, action) => {
@@ -159,7 +209,6 @@ const PostSlice = createSlice({
 
     builder.addCase(deletePostById.fulfilled, (state, action) => {
       state.loading = 'success';
-      toast.success('Post deleted successfully');
       state.posts = action.payload;
     })
 
@@ -219,6 +268,55 @@ const PostSlice = createSlice({
       state.error= action.error;
       console.log('action', action)
     })
+
+    
+    // add comment
+    builder.addCase(addCommentByPostId.pending, (state) => {
+      state.loading = "loading";
+    });
+    builder.addCase(addCommentByPostId.fulfilled, (state, action) => {
+      state.posts = action.payload;
+      state.loading = "success";
+    });
+    builder.addCase(addCommentByPostId.rejected, (state, action) => {
+      state.error = action.error;
+      state.loading = "rejected";
+    });
+
+    // get comment
+    builder.addCase(getCommentsByPostId.pending, (state) => {
+      state.loading = "loading";
+    });
+    builder.addCase(getCommentsByPostId.fulfilled, (state, action) => {
+      state.posts = action.payload;
+      state.loading = "success";
+    });
+    builder.addCase(getCommentsByPostId.rejected, (state, action) => {
+      console.log("com-error", action);
+      state.error = action.error;
+      state.loading = "rejected";
+    });
+
+    // delete comment
+    builder.addCase(deleteCommentByPostIdCommentId.pending, (state) => {
+      state.loading = "loading";
+    });
+    builder.addCase(
+      deleteCommentByPostIdCommentId.fulfilled,
+      (state, action) => {
+        state.posts = action.payload;
+        state.loading = "success";
+        toast.success("Comment deleted!");
+      }
+    );
+    builder.addCase(
+      deleteCommentByPostIdCommentId.rejected,
+      (state, action) => {
+        console.log("action-error", action);
+        state.error = action.error;
+        state.loading = "rejected";
+      }
+    );
 
    
   }

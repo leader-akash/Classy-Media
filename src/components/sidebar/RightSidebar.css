@@ -74,6 +74,12 @@
     border-radius: 50%;
 }
 
+.follow-unf-btn{
+    position: absolute;
+    right: 2px;
+    top: 15px;
+}
+
 
 .connect-with-me{
     color: var(--white-color);

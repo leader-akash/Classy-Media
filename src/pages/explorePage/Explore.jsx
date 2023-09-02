@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import "./Explore.css";
 import MessageBox from '../../components/messageBox/MessageBox'
 import RightSidebar from '../../components/sidebar/RightSidebar'
@@ -9,6 +9,9 @@ const Explore = () => {
 
   const {posts} = useSelector((state)=> state.post)
 
+  useEffect(() => {
+    window.scrollTo({top: 0 , left: 0, behaviour : 'smooth'})
+  }, [])
 
   return (
     <div>

@@ -11,7 +11,7 @@ const LeftSidebar = () => {
 
   const {username} = useParams();
   const location = useLocation();
-  console.log('params', username)
+
   const [boxOpen, setBoxOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -42,7 +42,7 @@ const LeftSidebar = () => {
         <p className='items' onClick={()=> navigate("/home")}> <i className="fa-solid fa-house side-icon"></i> Home</p>
         <p className='items' onClick={()=> navigate("/explore")}><i className="fa-solid fa-hashtag side-icon"></i> Explore</p>
         <p className='items' onClick={()=> navigate("/bookmarks")}> <i className="fa-regular fa-bookmark side-icon"></i> Bookmarks</p>
-        <p className='items' onClick={()=> navigate(`/profile/${user?.username}`)}> <i className="fa-regular fa-user side-icon"></i> Profile</p>
+        <p className='items' onClick={()=> navigate(`/profile/${user?.username}`, { state: { username: user?.username } })}> <i className="fa-regular fa-user side-icon"></i> Profile</p>
       </div>
 
       <div className='profile-settings' onClick={()=> setBoxOpen(boxOpen => !boxOpen)}>

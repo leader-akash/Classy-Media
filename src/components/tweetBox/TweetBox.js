@@ -47,7 +47,7 @@ const TweetBox = () => {
         </div>
         {/* <form> */}
         <div>
-            <textarea className='tweet-input' required rows={5} cols={60} placeholder="What's happening?" maxLength={210} value={textVal}  onChange={(e)=>handleText(e)}></textarea>
+            <textarea className='tweet-input' required rows={3} cols={40} placeholder="What's happening?" maxLength={210} value={textVal}  onChange={(e)=>handleText(e)}></textarea>
         </div>
         <div className='tweet-footer'>
             <div className='img-gif-content'>

@@ -16,6 +16,9 @@ const Homepage = () => {
   useEffect(() => {
     dispatch(getAllposts())
   }, [])
+  useEffect(() => {
+    window.scrollTo({top: 0 , left: 0, behaviour : 'smooth'})
+  }, [])
 
   return (
     <div>
@@ -32,12 +35,13 @@ const Homepage = () => {
 
       <div className='homepage-msg-box'>
         {
-          posts?.map((el) => (
+          posts?.map((el, i) => (
             <MessageBox
-              details={el} />
+              details={el}
+              key={i} />
           ))}
       </div>
-
+            {console.log('kkkk', posts)}
       <RightSidebar />
     </div>
   )
