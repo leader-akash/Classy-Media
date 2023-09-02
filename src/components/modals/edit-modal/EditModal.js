@@ -112,7 +112,7 @@ const EditModal = ({ editOpen, openEditModal, closeEditModal }) => {
           </div>
           <div>
             <label className="form-inputs label-name"> Name </label>
-            <input className='input-box' type="text" id="fullName" placeholder="Akash" value={nameVal} onChange={(e) => setNameVal(e.target.value)} />
+            <input className='input-box' type="text" id="fullName" placeholder="Akash" value={nameVal} onChange={(e) => setNameVal(e.target.value)}  maxLength={12} required/>
           </div>
           <div>
             <label className="form-inputs label-name" > Bio Link </label>
@@ -120,7 +120,7 @@ const EditModal = ({ editOpen, openEditModal, closeEditModal }) => {
           </div>
           <div>
             <label className="form-inputs label-name"> Bio </label>
-            <textarea className='input-box textarea-input' rows={2} cols={1} value={bio} onChange={(e) => setBio(e.target.value)} />
+            <textarea className='input-box textarea-input' rows={2} cols={1} value={bio} onChange={(e) => setBio(e.target.value)} maxLength={250}/>
           </div>
 
           <div>

@@ -53,36 +53,6 @@ const SignupModal = ({ signupOpen, openModal, closeSignupModal }) => {
     navigate("/home");
   }
 
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (passwordVal !== confirmPasswordVal) {
-  //     setIsPasswordMatch(true);
-  //   }
-  //   else {
-  //     axios.post(`/api/auth/signup`, {
-  //       firstName: nameVal,
-  //       username: usernameVal,
-  //       password: passwordVal
-  //     })
-  //       .then((res) => {
-  //         localStorage.setItem("token", res.data?.encodedToken);
-  //         localStorage.setItem("userinfo", JSON.stringify(res.data?.createdUser));
-  //         setGetToken(res.data?.encodedToken)
-  //         toast.success(`Hi ${nameVal}, Welcome  to Classy Media 💖`)
-  //         navigate("/home");
-  //       })
-  //       .catch((err) => {
-  //         console.log("err-sign", err);
-  //         toast.error("User already exists 😔")
-  //       })
-
-  //   }
-
-  // }
-
-
-
   return (
     <Modal classNames="signupModal" open={signupOpen} onClose={closeSignupModal} center>
 
@@ -91,11 +61,11 @@ const SignupModal = ({ signupOpen, openModal, closeSignupModal }) => {
         <form id="signupForm" onSubmit={handleSubmit}>
           <div>
             <label className="form-inputs"> Name </label>
-            <input className='input-box' type="text" id="fullName" placeholder="Akash" value={nameVal} onChange={(e) => setNameVal(e.target.value)} required />
+            <input className='input-box' type="text" id="fullName" placeholder="Akash" value={nameVal}  onChange={(e) => setNameVal(e.target.value)} maxLength={12} required />
           </div>
           <div>
             <label className="form-inputs" > Username </label>
-            <input className='input-box' type="text" id="email" placeholder="Akash123" value={usernameVal} onChange={(e) => setUsernameVal(e.target.value)} required />
+            <input className='input-box' type="text" id="email" placeholder="Akash123" value={usernameVal} onChange={(e) => setUsernameVal(e.target.value)} maxLength={12} required />
           </div>
           <div>
             <label className="form-inputs"> Password </label>

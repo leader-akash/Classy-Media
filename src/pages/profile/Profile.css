@@ -10,7 +10,6 @@
     height: 230px;
     width: 100%;
     padding: 0 5px;
-    /* border: solid 1px white; */
     position: relative;
 }
 
@@ -26,9 +25,6 @@
     margin-top: -70px;
     z-index: 1;
     margin-left: 20px;
-    /* position: absolute; */
-    /* bottom: -89px;
-    left: 310px; */
     border: solid 1px white;
 }
 
@@ -61,7 +57,8 @@
 }
 
 .github-link{
-    color: #0084ff
+    color: #0084ff;
+    word-wrap: break-word;
 }
 
 .user-bio{
@@ -72,6 +69,7 @@
 
 .user-info{
     margin-bottom: 1rem;
+    word-wrap: break-word;
 }
 
 .github-link{
@@ -91,20 +89,11 @@
 
 .following{
     margin-right: 1rem;
-    cursor: pointer;
-}
-
-.following:hover{
-    color: #0084ff;
-}
-
-
-.followers:hover{
-    color: #0084ff;
+    cursor:default;
 }
 
 .followers{
-    cursor: pointer;
+    cursor: default;
 }
 
 .profile-msg-box{

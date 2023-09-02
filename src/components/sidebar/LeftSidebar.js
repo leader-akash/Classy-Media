@@ -32,6 +32,9 @@ const LeftSidebar = () => {
     navigate("/")
   }
 
+  const isActiveLink = (pathname) => {
+    return location.pathname === pathname;
+  };
 
   return (
     <div className='sidebar-container'>
@@ -39,10 +42,10 @@ const LeftSidebar = () => {
         <img className='logo-homepage' src={logo} alt="logo" onClick={()=> navigate('/home')}/>
       </div>
       <div className='item-container'>
-        <p className='items' onClick={()=> navigate("/home")}> <i className="fa-solid fa-house side-icon"></i> Home</p>
-        <p className='items' onClick={()=> navigate("/explore")}><i className="fa-solid fa-hashtag side-icon"></i> Explore</p>
-        <p className='items' onClick={()=> navigate("/bookmarks")}> <i className="fa-regular fa-bookmark side-icon"></i> Bookmarks</p>
-        <p className='items' onClick={()=> navigate(`/profile/${user?.username}`)}> <i className="fa-regular fa-user side-icon"></i> Profile</p>
+        <p className={`items ${isActiveLink('/home') ? 'items-active' : '' }`} onClick={()=> navigate("/home")}> <i className="fa-solid fa-house side-icon"></i> Home</p>
+        <p className={`items ${isActiveLink('/explore') ? 'items-active' : '' }`} onClick={()=> navigate("/explore")}><i className="fa-solid fa-hashtag side-icon"></i> Explore</p>
+        <p className={`items ${isActiveLink('/bookmarks') ? 'items-active' : '' }`} onClick={()=> navigate("/bookmarks")}> <i className="fa-regular fa-bookmark side-icon"></i> Bookmarks</p>
+        <p className={`items ${isActiveLink(`/profile/${user?.username}`) ? 'items-active' : '' }`} onClick={()=> navigate(`/profile/${user?.username}`)}> <i className="fa-regular fa-user side-icon"></i> Profile</p>
       </div>
 
       <div className='profile-settings' onClick={()=> setBoxOpen(boxOpen => !boxOpen)}>

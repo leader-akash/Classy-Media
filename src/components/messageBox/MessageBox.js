@@ -18,7 +18,6 @@ const MessageBox = ({ details }) => {
     (state) => state.post
   );
 
-  console.log('pottttt', posts)
   const { bookmarks } = useSelector((state) => state.bookmark);
 
   const [openComment, setOpenComment] = useState(false)
@@ -144,41 +143,6 @@ const MessageBox = ({ details }) => {
 
         </div>
       </div>
-
-      {/* comment */}
-
-      {/* {
-        openComment && 
-        <div className="input-container signup-form">
-        <h2 className='login-header'>Add comment</h2>
-        <form id="signupForm" className='comment-form' onSubmit={(e) => handleAddComment(e)}>
-          <div className='comment-items'>
-            {
-              user?.userPhoto ?
-                <img className='comment-img' src={user?.userPhoto} alt='img' onClick={() => navigate(`/profile/${user?.username}`, { state: { username: user?.username } })} />
-                :
-                <img className='comment-img' src={avatar} alt='img' onClick={() => navigate(`/profile/${user?.username}`)} />
-            }
-            <input className='comment-box' type="text" id="fullName" placeholder="Write a comment..." value={commentVal} onChange={(e) => setCommentVal(e.target.value)} required />
-            <button className="reply-btn" type="submit" >Reply</button>
-          </div>
-        </form>
-        {console.log('llllll', details)}
-        {
-          details?.comments && details?.comments?.map((el) => {
-            <div>
-              {
-                el?.comment?.avatar ?
-                  <img className='comment-img' src={el?.comment?.avatar} alt='img' onClick={() => navigate(`/profile/${details?.comments?.username}`, { state: { username: user?.username } })} />
-                  :
-                  <img className='comment-img' src={avatar} alt='img' onClick={() => navigate(`/profile/${details?.comments?.username}`)} />
-              }
-              <div>{el?.comment?.commentVal}</div>
-            </div>
-          })
-        }
-      </div>
-      } */}
 
       <CommentModal
         openComment={openComment}
