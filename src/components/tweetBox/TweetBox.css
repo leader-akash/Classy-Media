@@ -56,6 +56,10 @@
     display: inline-block;
 }
 
+.gif-cursor{
+    cursor: pointer;
+}
+
 .img-gif-content{
     display: flex;
     cursor: pointer;
@@ -106,7 +110,7 @@
 
 .cancel-image{
     position: absolute;
-    color: black;
+    color: red;
     font-weight: bold;
     font-size: 2rem;
     right: 71px;

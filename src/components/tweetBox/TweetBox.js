@@ -107,8 +107,18 @@ const TweetBox = () => {
             />
           </label>
 
-          {/* <p className='gif'>Gif</p>
-          <i className="fa-regular fa-face-smile smile-btn"></i> */}
+          <p className='gif'>
+          <label for='choose-img' className='gif-cursor'>
+            Gif
+            <input type='file' id='choose-img'
+              style={{ display: 'none', visibility: 'none' }}
+              accept="image/apng, image/avif, image/gif, image/jpeg, image/png, image/svg+xml, image/jpg,image/webp"
+              multiple
+              onChange={handlePostImage}
+            />
+          </label>
+          </p>
+          {/* <i className="fa-regular fa-face-smile smile-btn"></i> */}
         </div>
 
         <div className='count-tweet-btn'>
